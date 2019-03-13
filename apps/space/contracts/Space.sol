@@ -68,7 +68,7 @@ contract Space is AragonApp {
      * @notice set addresses as members
      * @param _members list of addresses
      */
-    function setAsMembers(address[] _members) internal {
+    function setAsMembers(address[] _members) internal onlyInit {
         for(uint i = 0; i < _members.length; i++) {
             isMember[_members[i]] = true;
         }
@@ -82,4 +82,19 @@ contract Space is AragonApp {
         return members.length;
     }
 
+    /**
+     * @notice add members to the space
+     * @param _members list of members addresses
+     */
+    function addMembers(address[] _members) public isInitialized auth(SPACE_MANAGER_ROLE) {
+        require(verifyMembers(_members), "invalid member address");
+
+        for(uint i = 0; i < _members.length; i++) {
+            //only add addresses that are not already members
+            if(isMember[_members[i]] != true) {
+                isMember[_members[i]] = true;
+                members.push(_members[i]);
+            }
+        }
+    }
 }

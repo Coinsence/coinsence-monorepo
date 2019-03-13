@@ -74,4 +74,12 @@ contract Space is AragonApp {
         }
     }
 
+    /**
+     * @notice get space members count
+     * @return members number
+     */
+    function getMembersCount() public view isInitialized returns (uint256) {
+        return members.length;
+    }
+
 }

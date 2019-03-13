@@ -11,6 +11,9 @@ contract Space is AragonApp {
     ///@notice space name 
     string public name;
 
+    ///@notice space description
+    bytes32 public descHash;
+
     ///@notice space owner
     address public owner;
 
@@ -26,19 +29,18 @@ contract Space is AragonApp {
      * @param _name space name
      * @param _members space members (can be empty)
      */
-    function initialize(string _name, address[] _members) public onlyInit {
+    function initialize(string _name, bytes32 _descHash, address[] _members) public onlyInit {
         //check if all members addresses are valid
         require(verifyMembers(members), "invalid member address");
 
         //set space parameters
         name = _name;
         owner = msg.sender;
+        descHash = _descHash;
         members = _members;
 
-        //mark all addresses as members
-        for(uint i = 0; i < _members.length; i++) {
-            isMember[_members[i]] = true;
-        }
+        //set list of addresses as members
+        setAsMembers(members);
 
         //set space owner as member 
         members.push(msg.sender);
@@ -60,6 +62,16 @@ contract Space is AragonApp {
             }
         }
         return true;
+    }
+
+    /**
+     * @notice set addresses as members
+     * @param _members list of addresses
+     */
+    function setAsMembers(address[] _members) internal {
+        for(uint i = 0; i < _members.length; i++) {
+            isMember[_members[i]] = true;
+        }
     }
 
 }

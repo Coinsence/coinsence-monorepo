@@ -6,6 +6,8 @@ import "@aragon/os/contracts/apps/AragonApp.sol";
 ///@author Coinsence blockchain team
 contract Space is AragonApp {
 
+    event newMember(address member);
+
     bytes32 public constant SPACE_MANAGER_ROLE = keccak256("SPACE_MANAGER_ROLE");
 
     ///@notice space name 
@@ -84,6 +86,7 @@ contract Space is AragonApp {
 
     /**
      * @notice add members to the space
+     * @dev use this function to add members even if one member only (less functions)
      * @param _members list of members addresses
      */
     function addMembers(address[] _members) public isInitialized auth(SPACE_MANAGER_ROLE) {
@@ -94,6 +97,8 @@ contract Space is AragonApp {
             if(isMember[_members[i]] != true) {
                 isMember[_members[i]] = true;
                 members.push(_members[i]);
+
+                emit newMember(_members[i]);
             }
         }
     }

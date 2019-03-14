@@ -102,4 +102,34 @@ contract Space is AragonApp {
             }
         }
     }
+    
+    /**
+     * @notice Get member address position from members array
+     * @param _address member address
+     * @return position
+     */
+    function getMemberAddressPosition(address _address) internal view isInitialized returns (uint256) {
+        require(isMember[_address], "member not found");
+        
+        for(uint256 i = 0; i < members.length; i++) {
+            if(members[i] == _address) {
+                return i;
+            }
+        }    
+    }
+
+    /**
+     * @notice leave space
+     * @dev not the best way to do that...we may remove the members array completely
+     */
+    function leaveSpace() public isInitialized {
+        require(isMember[msg.sender], "You are not a space member");
+
+        //get address position in members array
+        uint256 memberPosition = getMemberAddressPosition(msg.sender);
+        //delete address
+        delete members[memberPosition];
+        //set as not member
+        isMember[msg.sender] = false;
+    }
 }

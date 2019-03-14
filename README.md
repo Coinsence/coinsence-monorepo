@@ -8,17 +8,16 @@ This repository contains the following apps:
 -
 -
 
-## Developing
+## Development Setup
 
+Node.js LTS or greater required.
+
+- Note: @aragon/cli and truffle npm deps are automatically installed when bootstrapping.
+
+```bash
+# Bootstrap project dependencies:
+$ npm i
 ```
-npm install
-```
-
-This installs global package dependencies and also bootstraps lerna packages.
-
-Running tests on all apps can be done running `npm run test` at the root directory. Running tests of an individual app can be done by running `npm run test` inside the app directory.
-
-By default tests are run in a in-memory instance of testrpc.
 
 ## Issues
 

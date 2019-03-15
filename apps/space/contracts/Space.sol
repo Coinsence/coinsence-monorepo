@@ -57,9 +57,9 @@ contract Space is AragonApp {
      * @param _members list of addresses
      * @return true if all addresses are valid, otherwise return false
      */
-    function verifyMembers(address[] _members) internal pure returns(bool) {
+    function verifyMembers(address[] _members) internal view returns(bool) {
         for(uint i = 0; i < _members.length; i++) {
-            if(_members[i] == address(0)) {
+            if((_members[i] == address(0)) || (_members[i] == msg.sender)) {
                 return false;
             }
         }

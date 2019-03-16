@@ -4,6 +4,6 @@ module.exports = {
     buildDirPath: '/build/contracts',
     skipFiles: [
         'Migrations.sol',
-        'test/Spoof.sol'
+        'test/Spoof.sol',
     ]
 }

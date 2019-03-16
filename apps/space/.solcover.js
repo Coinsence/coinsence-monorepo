@@ -3,7 +3,7 @@ module.exports = {
     copyPackages: ['@aragon/os'],
     buildDirPath: '/build/contracts',
     skipFiles: [
-        'Migrations.sol',
+        'misc/Migrations.sol',
         'test/Spoof.sol',
     ]
 }

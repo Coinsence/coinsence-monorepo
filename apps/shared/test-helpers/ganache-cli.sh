@@ -61,7 +61,8 @@ if [ "$SOLIDITY_COVERAGE" = true ]; then
 	solidity-coverage "$@"
 	result=$?
 elif [ "$TRUFFLE_TEST" = true ]; then
-	truffle test --network rpc "$@" | grep -v 'Compiling'
+	#truffle test --network rpc "$@" | grep -v 'Compiling'
+	aragon contracts test --network rpc "$@" | grep -v 'Compiling'
 	result=$?
 elif [ "$START_KIT" = true ] || [ "$RESTART_KIT" = true ]; then
 	npm run publish:apps && npm run start:kit

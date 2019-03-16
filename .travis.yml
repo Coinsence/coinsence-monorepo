@@ -7,7 +7,7 @@ cache:
 notifications:
   email: false
 node_js:
-  - 'node'
+  - '11.0.0'
 env:
   - TASK=test:space
   - TASK=coverage:space
@@ -17,8 +17,8 @@ script:
 #  - npm prune  
 after_success:
   - ./node_modules/.bin/lcov-result-merger 'apps/*/coverage/lcov.info' | ./node_modules/.bin/coveralls
-#before_script:
-#  - testrpc > /dev/null &
-#  - sleep 5
+before_script:
+  - testrpc > /dev/null &
+  - sleep 5
 #after_script:
 #  - npm run coverage && cat coverage/lcov.info | coveralls

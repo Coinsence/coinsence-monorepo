@@ -1,9 +1,5 @@
 const Space = artifacts.require("Space.sol");
-/*
-const ACL = artifacts.require("@aragon/os/contracts/acl/ACL");
-const Kernel = artifacts.require('@aragon/os/contracts/kernel/Kernel');
-const DAOFactory = artifacts.require('@aragon/os/contracts/factory/DAOFactory');
-*/
+
 const getContract = name => artifacts.require(name)
 const { assertRevert } = require('@aragon/test-helpers/assertThrow');
 
@@ -26,27 +22,6 @@ contract('Space app', (accounts) => {
       dao = getContract('Kernel').at(r.logs.filter(l => l.event == 'DeployDAO')[0].args.dao)
       acl = getContract('ACL').at(await dao.acl())
 
-      /*
-      //init kernel base
-      kernelBase = await Kernel.new(true) // immediately petrify
-      //init acl base
-      aclBase = await ACL.new()
-      //init new dao factory
-      daoFactory = await DAOFactory.new(
-        kernelBase.address,
-        aclBase.address,
-        ZERO_ADDR
-      );
-  
-      //init new dao from dao factory
-      const r = await daoFactory.newDAO(root)
-      dao = Kernel.at(
-        r.logs.filter(l => l.event == 'DeployDAO')[0].args.dao
-      );
-      //get DAO acl
-      acl = ACL.at(await dao.acl());
-      */
-  
       //create dao mamnager permission for space owner
       await acl.createPermission(
         root,

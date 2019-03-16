@@ -2,17 +2,21 @@
   "name": "coinsence-monorepo",
   "private": true,
   "devDependencies": {
-    "lerna": "^3.13.1"
+    "lerna": "^3.13.1",
+    "coveralls": "^3.0.3"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap --nohoist=@aragon/os",
     "postinstall": "npm run bootstrap",
     "devchain": "aragon devchain",
     "devchain:reset": "aragon devchain --reset",
     "publish:apps": "lerna run publish",
     "publish:http": "lerna run publish:http",
     "test": "lerna run test --no-bail",
-    "test:space": "cd apps/space && npm test"
+    "test:space": "cd apps/space && npm test",
+    "coverage": "npm run coverage:all",
+    "coverage:all": "lerna run --scope=@coinsence/apps-* --concurrency=1 --stream coverage",
+    "coverage:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream coverage"
   },
   "dependencies": {
     "@aragon/cli": "^5.4.0"

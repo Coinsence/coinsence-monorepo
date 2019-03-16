@@ -10,8 +10,9 @@
     "@aragon/cli": "^5.4.0",
     "@aragon/test-helpers": "^1.0.0",
     "@coinsence/test-helpers": "0.0.1",
+    "chai": "^4.2.0",
     "parcel-bundler": "^1.11.0",
-    "chai": "^4.2.0"
+    "solidity-coverage": "0.5.11"
   },
   "scripts": {
     "start": "aragon run",
@@ -25,7 +26,8 @@
     "publish:major": "aragon apm publish major",
     "versions": "aragon apm versions",
     "ganache-cli:test": "../shared/test-helpers/ganache-cli.sh",
-    "test": "aragon contracts compile && TRUFFLE_TEST=true npm run ganache-cli:test"
+    "test": "aragon contracts compile && TRUFFLE_TEST=true npm run ganache-cli:test",
+    "coverage": "SOLIDITY_COVERAGE=true npm run ganache-cli:test"
   },
   "keywords": []
 }

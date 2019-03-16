@@ -1,4 +1,4 @@
-# coinsence-monorepo
+# coinsence-monorepo [![Build Status](https://travis-ci.org/Coinsence/coinsence-monorepo.svg?branch=master)](https://travis-ci.org/Coinsence/coinsence-monorepo) [![Coverage Status](https://coveralls.io/repos/github/Coinsence/coinsence-monorepo/badge.svg?branch=master)](https://coveralls.io/github/Coinsence/coinsence-monorepo?branch=master)
 Coinsence project monorepo - includes our smart contracts
 
 This repository contains the following apps:

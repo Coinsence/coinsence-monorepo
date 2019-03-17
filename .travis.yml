@@ -1,0 +1,24 @@
+sudo: required
+language: node_js
+cache:
+  directories:
+    - node_modules
+    - apps/space/node_modules
+notifications:
+  email: false
+node_js:
+  - '11.0.0'
+env:
+  - TASK=test:space
+  - TASK=coverage:space
+script:
+  - travis_wait 60 npm run $TASK
+#before_script:
+#  - npm prune  
+after_success:
+  - ./node_modules/.bin/lcov-result-merger 'apps/*/coverage/lcov.info' | ./node_modules/.bin/coveralls
+before_script:
+  - testrpc > /dev/null &
+  - sleep 5
+#after_script:
+#  - npm run coverage && cat coverage/lcov.info | coveralls

@@ -58,6 +58,19 @@ module.exports = {
     rinkeby: {
       network_id: 4,
       provider: providerForNetwork('rinkeby')
+    },
+    coverage: {
+      host: "localhost",
+      network_id: "*",
+      port: 8555,
+      gas: 0xffffffffff,
+      gasPrice: 0x01
+    }
+  },
+
+  compilers: {
+    solc: {
+      version: "0.4.24"
     }
   }
 }

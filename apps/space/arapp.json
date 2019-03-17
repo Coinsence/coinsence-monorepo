@@ -9,7 +9,8 @@
   "environments": {
     "default": {
       "network": "development",
-      "appName": "coinsence-space.aragonpm.eth"
+      "appName": "coinsence-space.aragonpm.eth",
+      "registry": "0x5f6f7e8cc7346a11ca2def8f827b7a0b612c56a1"
     },
     "staging": {
       "registry": "0x98df287b6c145399aaa709692c8d308357bc085d",
@@ -24,5 +25,5 @@
       "network": "mainnet"
     }
   },
-  "path": "contracts/App.sol"
+  "path": "contracts/Space.sol"
 }

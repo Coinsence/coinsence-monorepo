@@ -14,9 +14,11 @@
     "publish:http": "lerna run publish:http",
     "test": "lerna run test --no-bail",
     "test:space": "lerna run --scope=@coinsence/apps-space --stream test",
+    "test:coin": "lerna run --scope=@coinsence/apps-coin --stream test",
     "coverage": "npm run coverage:all",
     "coverage:all": "lerna run --scope=@coinsence/apps-* --concurrency=1 --stream coverage",
-    "coverage:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream coverage"
+    "coverage:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream coverage",
+    "coverage:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream coverage"
   },
   "dependencies": {
     "@aragon/cli": "^5.4.0"

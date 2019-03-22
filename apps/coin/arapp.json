@@ -25,5 +25,5 @@
       "network": "mainnet"
     }
   },
-  "path": "contracts/App.sol"
+  "path": "contracts/Coin.sol"
 }

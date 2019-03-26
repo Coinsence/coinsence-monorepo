@@ -109,4 +109,25 @@ contract('Coin app', (accounts) => {
       });
     });
 
+    describe("Coin management", async() => {
+      let tokenToTransfer = 500;
+
+      it("should revert when transfer token to address(0)", async() => {
+        return assertRevert(async() => {
+          await coin.transfer(ZERO_ADDR, tokenToTransfer)
+          'invalid address'
+        });
+      });
+
+      it("transfer token to member1", async() => {
+        let ownerBalanceBeforeTransfer = await coin.balanceOf(root);
+        await coin.transfer(member1, tokenToTransfer, { from: root });
+        let ownerBalanceAfterTransfer = await coin.balanceOf(root);
+        let member1Balance = await coin.balanceOf(member1);
+        assert.equal(member1Balance.toNumber(), tokenToTransfer);
+        assert.equal(ownerBalanceAfterTransfer.toNumber(), ownerBalanceBeforeTransfer.toNumber()-tokenToTransfer)
+      });
+
+    });
+
 });  

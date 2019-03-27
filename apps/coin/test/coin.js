@@ -77,13 +77,13 @@ contract('Coin app', (accounts) => {
 
       it("should revert when issuing a coin from an address that does not have issuing permission", async() => {
         return assertRevert(async () => {
-          await coin.issueToken(name, symbol, decimals, { from: member1 })
+          await coin.issueCoin(name, symbol, decimals, { from: member1 })
           'address does not have permission to issue token'
         })
       });
 
       it("issue token", async() => {
-        await coin.issueToken(name, symbol, decimals, { from: root });
+        await coin.issueCoin(name, symbol, decimals, { from: root });
         assert.equal(await coin.name(), name);
         assert.equal(await coin.symbol(), symbol);
         assert.equal(await coin.decimal(), decimals);
@@ -95,13 +95,13 @@ contract('Coin app', (accounts) => {
 
       it("should revert when mint coin from an address that does not have minting permission", async() => {
         return assertRevert(async() => {
-          await coin.mintToken(tokenToMint, { from: member1})
+          await coin.mintCoin(tokenToMint, { from: member1})
           'address does not have permission to mint token'
         });
       });
 
       it("mint coin", async() => {
-        await coin.mintToken(tokenToMint, { from: root });
+        await coin.mintCoin(tokenToMint, { from: root });
         let ownerBalance = await coin.balanceOf(root);
         let totalSupply = await coin.totalSupply();
         assert.equal(ownerBalance.toNumber(), tokenToMint);

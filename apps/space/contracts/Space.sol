@@ -2,11 +2,12 @@ pragma solidity ^0.4.24;
 
 import "@aragon/os/contracts/apps/AragonApp.sol";
 
+
 ///@title Space aragon app smart contract
 ///@author Coinsence blockchain team
 contract Space is AragonApp {
 
-    event newMember(address member);
+    event NewMember(address member);
 
     bytes32 public constant SPACE_MANAGER_ROLE = keccak256("SPACE_MANAGER_ROLE");
 
@@ -52,31 +53,6 @@ contract Space is AragonApp {
     }
 
     /**
-     * @notice verify members addresses
-     * @dev maybe changing addresses verification in the front-end (less gas cost)
-     * @param _members list of addresses
-     * @return true if all addresses are valid, otherwise return false
-     */
-    function verifyMembers(address[] _members) internal view returns(bool) {
-        for(uint i = 0; i < _members.length; i++) {
-            if((_members[i] == address(0)) || (_members[i] == msg.sender)) {
-                return false;
-            }
-        }
-        return true;
-    }
-
-    /**
-     * @notice set addresses as members
-     * @param _members list of addresses
-     */
-    function setAsMembers(address[] _members) internal onlyInit {
-        for(uint i = 0; i < _members.length; i++) {
-            isMember[_members[i]] = true;
-        }
-    }
-
-    /**
      * @notice get space members count
      * @return members number
      */
@@ -92,30 +68,15 @@ contract Space is AragonApp {
     function addMembers(address[] _members) public isInitialized auth(SPACE_MANAGER_ROLE) {
         require(verifyMembers(_members), "invalid member address");
 
-        for(uint i = 0; i < _members.length; i++) {
+        for (uint i = 0; i < _members.length; i++) {
             //only add addresses that are not already members
-            if(isMember[_members[i]] != true) {
+            if (isMember[_members[i]] != true) {
                 isMember[_members[i]] = true;
                 members.push(_members[i]);
 
-                emit newMember(_members[i]);
+                emit NewMember(_members[i]);
             }
         }
-    }
-    
-    /**
-     * @notice Get member address position from members array
-     * @param _address member address
-     * @return position
-     */
-    function getMemberAddressPosition(address _address) internal view isInitialized returns (uint256) {
-        require(isMember[_address], "member not found");
-        
-        for(uint256 i = 0; i < members.length; i++) {
-            if(members[i] == _address) {
-                return i;
-            }
-        }    
     }
 
     /**
@@ -131,5 +92,45 @@ contract Space is AragonApp {
         delete members[memberPosition];
         //set as not member
         isMember[msg.sender] = false;
+    }
+
+    /**
+     * @notice verify members addresses
+     * @dev maybe changing addresses verification in the front-end (less gas cost)
+     * @param _members list of addresses
+     * @return true if all addresses are valid, otherwise return false
+     */
+    function verifyMembers(address[] _members) internal view returns(bool) {
+        for (uint i = 0; i < _members.length; i++) {
+            if ((_members[i] == address(0)) || (_members[i] == msg.sender)) {
+                return false;
+            }
+        }
+        return true;
+    }
+
+    /**
+     * @notice set addresses as members
+     * @param _members list of addresses
+     */
+    function setAsMembers(address[] _members) internal onlyInit {
+        for (uint i = 0; i < _members.length; i++) {
+            isMember[_members[i]] = true;
+        }
+    }
+    
+    /**
+     * @notice Get member address position from members array
+     * @param _address member address
+     * @return position
+     */
+    function getMemberAddressPosition(address _address) internal view isInitialized returns (uint256) {
+        require(isMember[_address], "member not found");
+        
+        for (uint256 i = 0; i < members.length; i++) {
+            if (members[i] == _address) {
+                return i;
+            }
+        }    
     }
 }

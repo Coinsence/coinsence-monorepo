@@ -18,7 +18,11 @@
     "coverage": "npm run coverage:all",
     "coverage:all": "lerna run --scope=@coinsence/apps-* --concurrency=1 --stream coverage",
     "coverage:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream coverage",
-    "coverage:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream coverage"
+    "coverage:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream coverage",
+    "lint": "lerna run --scope=@coinsence/apps-* --stream lint",
+    "lint:fix": "lerna run --scope=@coinsence/apps-* --stream fix",
+    "lint:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream lint",
+    "lint:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream lint"
   },
   "dependencies": {
     "@aragon/cli": "^5.4.0"

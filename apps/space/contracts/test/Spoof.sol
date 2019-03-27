@@ -9,6 +9,7 @@ import "@aragon/os/contracts/factory/DAOFactory.sol";
 // means Truffle will not compile them for us, because they are from
 // an external dependency.
 
+
 // solium-disable-next-line no-empty-blocks
 contract Spoof {
   // ...

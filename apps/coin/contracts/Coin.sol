@@ -5,6 +5,7 @@ import "@aragon/os/contracts/lib/math/SafeMath.sol";
 
 import "./StandardCoin.sol";
 
+
 ///@title Coin aragon app smart contract
 ///@author Coinsence blockchain team
 contract Coin is StandardCoin, AragonApp {

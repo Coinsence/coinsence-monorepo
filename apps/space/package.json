@@ -26,6 +26,8 @@
     "publish:major": "aragon apm publish major",
     "versions": "aragon apm versions",
     "ganache-cli:test": "../shared/test-helpers/ganache-cli.sh",
+    "lint": "solium --dir ./contracts",
+    "fix": "solium --dir ./contracts --fix",
     "test": "TRUFFLE_TEST=true npm run ganache-cli:test",
     "coverage": "SOLIDITY_COVERAGE=true npm run ganache-cli:test"
   },

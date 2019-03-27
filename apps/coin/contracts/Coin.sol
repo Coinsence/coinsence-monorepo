@@ -76,7 +76,8 @@ contract Coin is StandardCoin, AragonApp {
      * @notice mint coin
      * @param amount amount of coins to mint
      */
-    function mintCoin(uint256 amount) public isInitialized auth(MINT_ROLE) {
+    function mintCoin(address recipient, uint256 amount) public isInitialized auth(MINT_ROLE) {
+        require(recipient != address(0), "invalid recipient address");
         require(amount > 0, "amount equal to zero");
 
         _mint(msg.sender, amount);

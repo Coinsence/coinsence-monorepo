@@ -100,15 +100,29 @@ contract('Coin app', (accounts) => {
     describe("Coin minting", async() => {
       let tokenToMint = 1000;
 
-      it("should revert when mint coin from an address that does not have minting permission", async() => {
+      it("should revert when mint coins from an address that does not have minting permission", async() => {
         return assertRevert(async() => {
-          await coin.mintCoin(tokenToMint, { from: member1})
+          await coin.mintCoin(root, tokenToMint, { from: member1})
+          'address does not have permission to mint token'
+        });
+      });
+
+      it("should revert when mint coins to address(0)", async() => {
+        return assertRevert(async() => {
+          await coin.mintCoin(ZERO_ADDR, tokenToMint, { from: root})
+          'address does not have permission to mint token'
+        });
+      });
+
+      it("should revert when mint amount of coins equal to 0", async() => {
+        return assertRevert(async() => {
+          await coin.mintCoin(root, 0, { from: root})
           'address does not have permission to mint token'
         });
       });
 
       it("mint coin", async() => {
-        await coin.mintCoin(tokenToMint, { from: root });
+        await coin.mintCoin(root, tokenToMint, { from: root });
         let ownerBalance = await coin.balanceOf(root);
         let totalSupply = await coin.totalSupply();
         assert.equal(ownerBalance.toNumber(), tokenToMint);

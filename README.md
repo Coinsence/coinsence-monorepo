@@ -4,7 +4,7 @@ Coinsence project monorepo - includes our smart contracts
 This repository contains the following apps:
 
 - **[Space](apps/space)**: Deploy and manage coinsence spaces
-- 
+- **[Coin](apps/coin)**: Deploy and manage coinsence coins
 -
 -
 
@@ -17,6 +17,20 @@ Node.js LTS or greater required.
 ```bash
 # Bootstrap project dependencies:
 $ npm i
+
+# Run all tests
+$ npm run test
+
+# Run single app tests
+$ npm run test:space
+
+# Run coverage
+$ npm run coverage
+
+# Run single app coverage
+$ npm run coverage:space
+
+# current app name aliases: {space, coin}
 ```
 
 ## Issues

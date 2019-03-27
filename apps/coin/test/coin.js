@@ -88,6 +88,13 @@ contract('Coin app', (accounts) => {
         assert.equal(await coin.symbol(), symbol);
         assert.equal(await coin.decimal(), decimals);
       });
+
+      it("should revert when issuing an already issued coin", async() => {
+        return assertRevert(async () => {
+          await coin.issueCoin(name, symbol, decimals, { from: root })
+          'address does not have permission to issue token'
+        })
+      });
     });
 
     describe("Coin minting", async() => {

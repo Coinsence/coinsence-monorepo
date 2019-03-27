@@ -68,6 +68,8 @@ contract Coin is StandardCoin, AragonApp {
         _name = name;
         _symbol = symbol;
         _decimals = decimals;
+
+        _isIssued = true;
     }
 
     /**

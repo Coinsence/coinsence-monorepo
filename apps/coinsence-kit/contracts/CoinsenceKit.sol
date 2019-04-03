@@ -57,7 +57,7 @@ contract CoinsenceKit is KitBase {
     function newInstance(string name, bytes32 descHash, address[] members) public {
         bytes32[2] memory appIds = [
             apmNamehash("coinsence-space"),     // 0
-            apmNamehash("coinsence-coin")     // 1
+            apmNamehash("coinsence-coin")       // 1
         ];
 
         address root = msg.sender;
@@ -77,11 +77,11 @@ contract CoinsenceKit is KitBase {
 
         Coin coin = Coin(
             dao.newAppInstance(
-                appIds[0],
-                latestVersionAppBase(appIds[0])
+                appIds[1],
+                latestVersionAppBase(appIds[1])
             )
         );
-        emit InstalledApp(space, appIds[0]);
+        emit InstalledApp(coin, appIds[1]);
 
         space.initialize(name, descHash, members);
         coin.initialize();

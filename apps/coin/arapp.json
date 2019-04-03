@@ -1,8 +1,13 @@
 {
   "roles": [
     {
-      "name": "Dummy role",
-      "id": "DUMMY_ROLE",
+      "name": "Issue role",
+      "id": "ISSUE_ROLE",
+      "params": []
+    },
+    {
+      "name": "Mint role",
+      "id": "MINT_ROLE",
       "params": []
     }
   ],

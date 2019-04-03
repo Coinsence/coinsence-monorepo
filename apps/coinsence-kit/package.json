@@ -14,14 +14,15 @@
     "@coinsence/test-helpers": "0.0.1",
     "parcel-bundler": "^1.11.0",
     "chai": "^4.2.0",
-    "solidity-coverage": "0.5.11"
+    "solidity-coverage": "0.5.11",
+    "eth-ens-namehash": "^2.0.8"
   },
   "scripts": {
     "compile": "aragon contracts compile",
-    "deploy": "aragon deploy",
-    "start:kit": "aragon run --kit CoinsenceKit --kit-init @ARAGON_ENS",
+    "deploy": "aragon deploy --init @ARAGON_ENS",
+    "start": "aragon run --kit CoinsenceKit --kit-init @ARAGON_ENS",
     "lint": "solium --dir ./contracts",
-    "test": "TRUFFLE_TEST=true npm run ganache-cli:test",
+    "test": "aragon contracts test --environment default",
     "coverage": "SOLIDITY_COVERAGE=true npm run ganache-cli:test",
     "ganache-cli:test": "../shared/test-helpers/ganache-cli.sh",
     "versions": "aragon apm versions"

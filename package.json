@@ -12,17 +12,24 @@
     "devchain:reset": "aragon devchain --reset",
     "publish:apps": "lerna run publish",
     "publish:http": "lerna run publish:http",
+    "deploy:apps": "./scripts/deploy-apps.sh",
+    "restart": "RESTART_KIT=true apps/shared/test-helpers/ganache-cli.sh",
+    "start": "START_KIT=true apps/shared/test-helpers/ganache-cli.sh",
+    "start:kit": "lerna run --scope=@coinsence/coinsence-kit --stream start",
     "test": "lerna run test --no-bail",
     "test:space": "lerna run --scope=@coinsence/apps-space --stream test",
     "test:coin": "lerna run --scope=@coinsence/apps-coin --stream test",
+    "test:kit": "lerna run --scope=@coinsence/coinsence-kit --stream test",
     "coverage": "npm run coverage:all",
     "coverage:all": "lerna run --scope=@coinsence/apps-* --concurrency=1 --stream coverage",
     "coverage:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream coverage",
     "coverage:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream coverage",
+    "coverage:kit": "lerna run --scope=@coinsence/coinsence-kit --concurrency=1 --stream coverage",
     "lint": "lerna run --scope=@coinsence/apps-* --stream lint",
     "lint:fix": "lerna run --scope=@coinsence/apps-* --stream fix",
     "lint:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream lint",
-    "lint:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream lint"
+    "lint:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream lint",
+    "lint:kit": "lerna run --scope=@coinsence/coinsence-kit --stream lint"
   },
   "dependencies": {
     "@aragon/cli": "^5.4.0"

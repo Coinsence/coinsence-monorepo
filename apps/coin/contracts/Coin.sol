@@ -65,7 +65,8 @@ contract Coin is StandardCoin, AragonApp {
      * @param symbol coin symbol
      * @param decimals coin decimal
      */
-    function issueCoin(string memory name, string memory symbol, uint8 decimals) public isInitialized isIssued auth(ISSUE_ROLE) {
+    function issueCoin(string memory name, string memory symbol, uint8 decimals) public isInitialized auth(ISSUE_ROLE) {
+        require(!_isIssued, "Coin already issued");
         _name = name;
         _symbol = symbol;
         _decimals = decimals;
@@ -82,12 +83,6 @@ contract Coin is StandardCoin, AragonApp {
         require(amount > 0, "amount equal to zero");
 
         _mint(msg.sender, amount);
-    }
-
-    ///@notice modifier to check if coin is not issued yet
-    modifier isIssued() {
-        require(!_isIssued, "Coin already issued by space manager");
-        _;
     }
 
 }

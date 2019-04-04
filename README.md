@@ -5,10 +5,25 @@ This repository contains the following apps:
 
 - **[Space](apps/space)**: Deploy and manage coinsence spaces
 - **[Coin](apps/coin)**: Deploy and manage coinsence coins
--
+- **[CoinsenceKit](apps/coinsence-kit)**: Deploy and manage coinsence DAO
 -
 
-## Development Setup
+## Local development chain
+
+For local development it is recommended to use 
+[ganache](http://truffleframework.com/ganache/) to run a local development 
+chain. Using the ganache simulator no full Ethereum node is required.
+
+We use the default aragon-cli devchain command to confgure and run a local 
+development ganache.
+
+    $ npm run devchain (or aragon devchain)
+
+To clear/reset the chain use: 
+
+    $ npm run devchain -- --reset (or aragon devchain --reset)
+
+### Development Setup
 
 Node.js LTS or greater required.
 
@@ -17,6 +32,16 @@ Node.js LTS or greater required.
 ```bash
 # Bootstrap project dependencies:
 $ npm i
+
+# Run an Ethereum node and ipfs
+$ npm run devchain
+
+# Deploy each app to the devchain
+$ npm run deploy:apps
+
+# Deploy a new CoinsenceKit and create a new DAO with the latest app versions
+$ npm run deploy:kit
+$ npm run deploy:dao
 
 # Run all tests
 $ npm run test
@@ -27,11 +52,85 @@ $ npm run test:space
 # Run coverage
 $ npm run coverage
 
-# Run single app coverage
-$ npm run coverage:space
-
 # current app name aliases: {space, coin}
 ```
+
+## Contract architecture
+
+Contracts are organized in independent apps (see `/apps`) and are developed 
+and deployed independently. Each app has a version and can be "installed" 
+on the Coinsence DAO independently.
+
+![](docs/coinsence-diagram.png)
+
+A DAO can be deployed using the `scripts/deploy-kit.js` script or with the 
+`npm run deploy:dao` command. This deploys a new Kredits DAO, installs
+the latest app versions and sets the required permissions.
+
+See each app in `/apps/*` for details.
+
+## Helper scripts
+
+`scripts/` contains some helper scripts to interact with the contracts from the
+CLI. _At some point these should be moved into a real nice CLI._
+
+To run these scripts use `truffle exec`. For example: `truffle exec
+scripts/add-proposal.js`.
+
+### current-address.js
+
+Prints all known DAO addresses and the DAO address for the current network
+
+    $ truffle exec scripts/current-address.js
+    or
+    $ npm run dao:address
+
+### deploy-kit.js
+
+Deploys a new CoinsenceKit that allows to create a new DAO
+
+    $ truffle exec script/deploy-kit.js
+    or
+    $ npm run deploy:kit
+
+`ENS` address is required as environment variable.  
+
+### new-dao.js
+
+Creates and configures a new DAO instance.
+
+    $ truffle exec script/new-dao.js
+    or
+    $ npm run deploy:dao
+
+CoinsenceKit address is load from `lib/addresses/CoinsenceKit.json` or can be 
+configured through the `COINSENCE_KIT` environment variable.
+
+### deploy-apps.sh
+
+Runs `npm install` for each app and publishes a new version.
+
+    $ ./scripts/deploy-apps.sh
+    or
+    $ npm run deploy:apps
+
+## ACL / Permissions
+
+## Upgradeable contracts
+
+We use aragonOS for upgradeablity of the different contracts.
+Refer to the [aragonOS upgradeablity documentation](https://hack.aragon.org/docs/upgradeability-intro) 
+for more details.
+
+### Example
+
+1. Setup (see ###Development Setup)
+    1. Deploy each contract/apps (see `/apps/*`)
+    2. Create a new DAO (see scripts/deploy-kit.js)
+2. Update
+    1. Deploy a new Version of the contract/app (see `/apps/*`)
+    2. Use the `aragon dao upgrade` command to "install" the new version for the DAO
+      (`aragon dao upgrade <DAO address> <app name>`)
 
 ## Issues
 

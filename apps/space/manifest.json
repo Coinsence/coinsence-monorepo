@@ -1,10 +1,4 @@
 {
-  "name": "Application",
-  "description": "An application for Aragon",
-  "icons": [{
-    "src": "/dist/images/icon.png",
-    "sizes": "192x192"
-  }],
-  "start_url": "/dist/index.html",
-  "script": "/dist/script.js"
+  "name": "CoinsenceKit",
+  "description": "Kit for managing coinsence DAO"
 }

@@ -30,6 +30,7 @@ contract Member is AragonApp {
     }
 
     function addMember(address account, bytes32 ipfsHash) public isInitialized {
+        require(account != address(0), "invalid address");
         require(!addressExists(account));
         uint32 _id = membersCount + 1;
         Member storage m = members[_id];

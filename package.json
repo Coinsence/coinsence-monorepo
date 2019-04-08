@@ -2,8 +2,10 @@
   "name": "coinsence-monorepo",
   "private": true,
   "devDependencies": {
+    "@aragon/cli": "^5.4.0",
+    "coveralls": "^3.0.3",
     "lerna": "^3.13.1",
-    "coveralls": "^3.0.3"
+    "promptly": "^3.0.3"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --nohoist=@aragon/os",
@@ -29,9 +31,15 @@
     "lint:fix": "lerna run --scope=@coinsence/apps-* --stream fix",
     "lint:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream lint",
     "lint:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream lint",
-    "lint:kit": "lerna run --scope=@coinsence/coinsence-kit --stream lint"
+    "lint:kit": "lerna run --scope=@coinsence/coinsence-kit --stream lint",
+    "compile-contracts": "aragon contracts compile --all",
+    "build-json": "node ./scripts/build-json.js",
+    "repl": "truffle exec scripts/repl.js",
+    "seeds": "truffle exec scripts/seeds.js"
   },
   "dependencies": {
-    "@aragon/cli": "^5.4.0"
+    "eth-provider": "^0.2.2",
+    "ethers": "^4.0.27",
+    "ipfs-http-client": "^30.1.1"
   }
 }

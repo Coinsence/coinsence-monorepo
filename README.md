@@ -5,8 +5,8 @@ This repository contains the following apps:
 
 - **[Space](apps/space)**: Deploy and manage coinsence spaces
 - **[Coin](apps/coin)**: Deploy and manage coinsence coins
+- **[Member](apps/member)**: Manage coinsence members accounts
 - **[CoinsenceKit](apps/coinsence-kit)**: Deploy and manage coinsence DAO
--
 
 ## Local development chain
 

@@ -1,5 +1,6 @@
 const fs = require('fs');
 const path = require('path');
+const argv = require('yargs').argv;
 
 const fileInject = require('./helpers/file_inject.js');
 const getNetworkId = require('./helpers/networkid.js');
@@ -22,7 +23,11 @@ module.exports = async function(callback) {
 
   let coinsenceKit = CoinsenceKit.at(coinsenceKitAddress)
 
-  coinsenceKit.newInstance().then((ret) => {
+  console.log(argv.name);
+  console.log(argv.ipfs);
+  console.log(argv.members);
+
+  coinsenceKit.newInstance(argv.name, argv.ipfs, argv.members).then((ret) => {
     console.log(ret.logs);
     const installedEvents = ret.logs.filter(log => log.event === 'InstalledApp').map(log => log.args)
     const deployEvents = ret.logs.filter(log => log.event === 'DeployInstance').map(log => log.args)

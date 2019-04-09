@@ -15,6 +15,8 @@
     "publish:apps": "lerna run publish",
     "publish:http": "lerna run publish:http",
     "deploy:apps": "./scripts/deploy-apps.sh",
+    "deploy:kit": "cd apps/coinsence-kit && npm run compile-contracts && aragon contracts exec script/deploy-kit.js",
+    "deploy:dao": "cd apps/coinsence-kit && aragon contracts exec script/new-dao.js",
     "restart": "RESTART_KIT=true apps/shared/test-helpers/ganache-cli.sh",
     "start": "START_KIT=true apps/shared/test-helpers/ganache-cli.sh",
     "start:kit": "lerna run --scope=@coinsence/coinsence-kit --stream start",
@@ -32,7 +34,6 @@
     "lint:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream lint",
     "lint:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream lint",
     "lint:kit": "lerna run --scope=@coinsence/coinsence-kit --stream lint",
-    "compile-contracts": "aragon contracts compile --all",
     "build-json": "node ./scripts/build-json.js",
     "repl": "truffle exec scripts/repl.js",
     "seeds": "truffle exec scripts/seeds.js"

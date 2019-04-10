@@ -101,9 +101,13 @@ Creates and configures a new DAO instance.
 
     $ cd apps/coinsence-kit && aragon contracts exec script/new-dao.js 
       Arguments:
-        --name= space name
-        --ipfs= ipfs hash 
-        --members= array of members addresses
+        --name space name
+        --ipfs ipfs hash 
+        --members array of members addresses
+        
+    example:
+    $aragon contracts exec script/new-dao.js --name "coinsence" --ipfs "0x0" --members --
+
     or
     $ npm run deploy:dao
 

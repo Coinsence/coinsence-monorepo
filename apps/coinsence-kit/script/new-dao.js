@@ -1,6 +1,6 @@
 const fs = require('fs');
 const path = require('path');
-const argv = require('yargs').argv;
+const argv = require('yargs').array('members').argv;
 
 const fileInject = require('./helpers/file_inject.js');
 const getNetworkId = require('./helpers/networkid.js');
@@ -22,10 +22,6 @@ module.exports = async function(callback) {
   console.log(`Using CoinsenceKit at: ${coinsenceKitAddress}`);
 
   let coinsenceKit = CoinsenceKit.at(coinsenceKitAddress)
-
-  console.log(argv.name);
-  console.log(argv.ipfs);
-  console.log(argv.members);
 
   coinsenceKit.newInstance(argv.name, argv.ipfs, argv.members).then((ret) => {
     console.log(ret.logs);

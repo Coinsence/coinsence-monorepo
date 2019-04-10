@@ -89,7 +89,7 @@ Prints all known DAO addresses and the DAO address for the current network
 
 Deploys a new CoinsenceKit that allows to create a new DAO
 
-    $ truffle exec script/deploy-kit.js
+    $ cd apps/coinsence-kit && truffle exec script/deploy-kit.js
     or
     $ npm run deploy:kit
 
@@ -99,7 +99,11 @@ Deploys a new CoinsenceKit that allows to create a new DAO
 
 Creates and configures a new DAO instance.
 
-    $ truffle exec script/new-dao.js
+    $ cd apps/coinsence-kit && aragon contracts exec script/new-dao.js 
+      Arguments:
+        --name= space name
+        --ipfs= ipfs hash 
+        --members= array of members addresses
     or
     $ npm run deploy:dao
 

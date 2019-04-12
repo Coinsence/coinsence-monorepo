@@ -1,15 +1,12 @@
 const argv = require('yargs').argv;
 const ethers = require('ethers');
-const getNetworkId = require('./networkid.js');
 const Coinsence = require('../../lib/coinsence');
 
-const arapp = require('../../arapp.json');
-const environment = argv['network'] || argv['environment'] || 'development';
-const apm = arapp.environments[environment].apm;
-
-module.exports = async function(web3) {
+module.exports = async function() {
   return new Promise((resolve, reject) => {
-    const provider = new ethers.providers.Web3Provider(web3.currentProvider);
+    const rpcApiUrl = argv['rpc-url'] || process.env.RPC_URL || 'http://localhost:8545';
+    const apm = argv['apm'] || process.env.APM || 'aragonpm.eth';
+    const provider = new ethers.providers.JsonRpcProvider(rpcApiUrl);
     let signer = provider.getSigner();
     // checking if siner supports signing transactions
     signer.getAddress().then(_ => {

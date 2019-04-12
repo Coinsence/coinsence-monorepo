@@ -8,8 +8,10 @@ const abisPath = path.join(libPath, 'abis');
 const files = {
   Coin: 'apps/space/build/contracts/Space.json',
   Space: 'apps/coin/build/contracts/Coin.json',
+  Member: 'apps/member/build/contracts/Member.json',
   Kernel: 'apps/space/build/contracts/Kernel.json',
-  ACL: 'apps/space/build/contracts/ACL.json'
+  ACL: 'apps/space/build/contracts/ACL.json',
+  CoinsenceKit: 'apps/coinsence-kit/build/contracts/CoinsenceKit.json'
 };
 
 Object.keys(files).forEach(contractName => {

@@ -2,10 +2,10 @@ const fs = require('fs');
 const path = require('path');
 const argv = require('yargs').array('members').argv;
 
-const fileInject = require('./helpers/file_inject.js');
-const getNetworkId = require('./helpers/networkid.js');
+const fileInject = require('../../shared/helpers/file_inject.js')
+const getNetworkId = require('../../shared/helpers/networkid.js')
 
-const addressesPath = path.join(__dirname, '..', '../../lib/addresses');
+const addressesPath = path.join(__dirname, '../../..', '/lib/addresses');
 
 const CoinsenceKit = artifacts.require('CoinsenceKit')
 

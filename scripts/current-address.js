@@ -1,10 +1,10 @@
 const knownDAOAddresses = require('../lib/addresses/dao.json');
 const knownKitAddresses = require('../lib/addresses/CoinsenceKit.json');
-const getNetworkId = require('./helpers/networkid.js')
 
-module.exports = async function(callback) {
-  const networkId = await getNetworkId(web3)
+const initCoinsence = require('./helpers/init_coinsence.js');
 
+initCoinsence().then(async function(coinsence) {
+  const networkId = (await coinsence.provider.getNetwork()).chainId;
   console.log('# All known DAO addresses');
   Object.keys(knownDAOAddresses).forEach((networkId) => {
     console.log(`  Network ID: ${networkId} => ${knownDAOAddresses[networkId]}`);
@@ -22,6 +22,4 @@ module.exports = async function(callback) {
 
   console.log(`# Current CoinsenceKit address: ${currentKitAddress}`);
   console.log(`# Current DAO address: ${currentDAOAddress}`);
-
-  callback();
-};
+});

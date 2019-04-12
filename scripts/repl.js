@@ -17,23 +17,14 @@ function promiseEval (repl) {
   }
 }
 
-module.exports = async function(callback) {
-  let coinsence;
-  try {
-    coinsence = await initCoinsence(web3);
-  } catch(e) {
-    callback(e);
-    return;
-  }
-
-  console.log(`Defined variables: coinsence, web3`);
+initCoinsence().then(coinsence => {
+  console.log(`Defined variables: coinsence, ethProvider`);
   let r = REPL.start();
   r.context.coinsence = coinsence;
-  r.context.web3 = web3;
+  r.context.ethProvider = coinsence.provider;
   r.eval = promiseEval(r);
 
   r.on('exit', () => {
     console.log('Bye');
-    callback();
   });
-}
+}).catch(console.log);

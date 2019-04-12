@@ -1,8 +1,8 @@
 const path = require('path');
 const argv = require('yargs').argv
 
-const fileInject = require('./helpers/file_inject.js')
-const getNetworkId = require('./helpers/networkid.js')
+const fileInject = require('../../shared/helpers/file_inject.js')
+const getNetworkId = require('../../shared/helpers/networkid.js')
 
 const CoinsenceKit = artifacts.require('CoinsenceKit')
 
@@ -22,7 +22,7 @@ module.exports = async function(callback) {
   CoinsenceKit.new(ensAddr).then((coinsenceKit) => {
     console.log(`Deployed CoinsenceKit at: ${coinsenceKit.address}`);
 
-    fileInject(path.join(__dirname, '..', '../../lib/addresses/CoinsenceKit.json'), networkId, coinsenceKit.address);
+    fileInject(path.join(__dirname, '../../..', 'lib/addresses/CoinsenceKit.json'), networkId, coinsenceKit.address);
 
     callback();
   }).catch((e) => {

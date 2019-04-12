@@ -92,14 +92,14 @@ contract Member is AragonApp {
     /**
      * @notice get member id by address
      */
-    function getContributorIdByAddress(address account) public view returns (uint32) {
+    function getMemberIdByAddress(address account) public view returns (uint32) {
         return membersIds[account];
     }
 
     /**
      * @notice get member address by id
      */
-    function getContributorAddressById(uint32 id) public view returns (address) {
+    function getMemberAddressById(uint32 id) public view returns (address) {
         return members[id].account;
     }
 

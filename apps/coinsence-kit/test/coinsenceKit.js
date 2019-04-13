@@ -28,7 +28,7 @@ contract('DAO bare kit', (accounts) => {
         });
 
         it('it should deploy DAO', async () => {
-            const receipt = await coinsenceKit.newInstance("coinsence", web3.fromAscii("0"), [], { from: accounts[0] });
+            const receipt = await coinsenceKit.newInstance("coinsence", web3.fromAscii("0"), { from: accounts[0] });
 
             address = receipt.logs.filter(l => l.event === 'DeployInstance')[0].args.dao
             apps = receipt.logs

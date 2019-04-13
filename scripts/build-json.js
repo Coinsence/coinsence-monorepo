@@ -6,8 +6,8 @@ const libPath = path.join(__dirname, '..', 'lib');
 const abisPath = path.join(libPath, 'abis');
 
 const files = {
-  Coin: 'apps/space/build/contracts/Space.json',
-  Space: 'apps/coin/build/contracts/Coin.json',
+  Space: 'apps/space/build/contracts/Space.json',
+  Coin: 'apps/coin/build/contracts/Coin.json',
   Member: 'apps/member/build/contracts/Member.json',
   Kernel: 'apps/space/build/contracts/Kernel.json',
   ACL: 'apps/space/build/contracts/ACL.json',

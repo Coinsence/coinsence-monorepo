@@ -1,6 +1,12 @@
 const REPL = require('repl');
+const promptly = require('promptly');
 
-const initCoinsence = require('./helpers/init_coinsence.js');
+const CoinsenceKit = require('../lib/kit.js');
+const Coinsence = require('../lib/coinsence.js');
+const initNetwork = require('./helpers/init_network.js');
+
+const defaultDaoAddresses = require('../lib/addresses/dao.json');
+const kitAddresses = require('../lib/addresses/CoinsenceKit.json');
 
 function promiseEval (repl) {
   const currentEval = repl.eval;
@@ -17,10 +23,25 @@ function promiseEval (repl) {
   }
 }
 
-initCoinsence().then(coinsence => {
-  console.log(`Defined variables: coinsence, ethProvider`);
+initNetwork().then(async function(details) {
+
+  const defaultDaoAddress = defaultDaoAddresses[details.networkId];
+  let kernelAddress = await promptly.prompt(`DAO address (default: ${defaultDaoAddress}):`, { default: defaultDaoAddress });
+
+  const kitAddress = kitAddresses[details.networkId];
+
+  const kit = new CoinsenceKit(
+    details.provider,
+    details.signer,
+    { networkId: details.networkId, address: kitAddress }
+  );
+
+  const coinsence = await new Coinsence(details.provider, details.signer, { addresses: { Kernel: kernelAddress } }).init();
+
+  console.log(`Defined variables: coinsence, kit, ethProvider`);
   let r = REPL.start();
   r.context.coinsence = coinsence;
+  r.context.kit = kit;
   r.context.ethProvider = coinsence.provider;
   r.eval = promiseEval(r);
 

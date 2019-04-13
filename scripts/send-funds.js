@@ -1,16 +1,19 @@
 const promptly = require('promptly');
 const ethers = require('ethers');
 
-const initCoinsence = require('./helpers/init_coinsence.js');
+const initNetwork = require('./helpers/init_network.js');
 
-initCoinsence().then(async function(coinsence) {
+initNetwork().then(async function(net) {
+  if (!net.signer) {
+    throw new Error('Signer required to send funds');
+  }
   let recipient = await promptly.prompt('Recipient address: ');
   let amount = await promptly.prompt('Amount: ', {default: '1'});
   amount = ethers.utils.parseEther(amount);
 
-  let fromAccount = await coinsence.signer.getAddress();
-  let fromBalance = await coinsence.signer.getBalance();
-  let recipientBalance = await coinsence.provider.getBalance(recipient);
+  let fromAccount = await net.signer.getAddress();
+  let fromBalance = await net.signer.getBalance();
+  let recipientBalance = await net.provider.getBalance(recipient);
 
   console.log('--------------');
   console.log(`sender account balance ${fromAccount}: ${fromBalance}`);
@@ -18,10 +21,10 @@ initCoinsence().then(async function(coinsence) {
 
   console.log(`\nsending ${amount} WEI from ${fromAccount} to ${recipient}`);
 
-  let transaction = await coinsence.signer.sendTransaction({to: recipient, value: amount});
+  let transaction = await net.signer.sendTransaction({to: recipient, value: amount});
 
   console.log('transaction:', transaction.hash);
 
-  recipientBalance = await coinsence.provider.getBalance(recipient);
+  recipientBalance = await net.provider.getBalance(recipient);
   console.log(`\nnew recipient account balance ${recipient}: ${recipientBalance}`);
 });

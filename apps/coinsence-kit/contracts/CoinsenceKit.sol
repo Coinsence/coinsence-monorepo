@@ -50,7 +50,7 @@ contract KitBase is APMNamehash {
 contract CoinsenceKit is KitBase {
 
     constructor(ENS _ens)
-    // solium-disable-next-line no-empty-blocks 
+    // solium-disable-next-line no-empty-blocks
     KitBase(_ens) public {
     }
 
@@ -81,7 +81,9 @@ contract CoinsenceKit is KitBase {
         space = Space(
             dao.newAppInstance(
                 appIds[0],
-                latestVersionAppBase(appIds[0])
+                latestVersionAppBase(appIds[0]),
+                new bytes(0),
+                true
             )
         );
         emit InstalledApp(space, appIds[0]);
@@ -89,7 +91,9 @@ contract CoinsenceKit is KitBase {
         coin = Coin(
             dao.newAppInstance(
                 appIds[1],
-                latestVersionAppBase(appIds[1])
+                latestVersionAppBase(appIds[1]),
+                new bytes(0),
+                true
             )
         );
         emit InstalledApp(coin, appIds[1]);
@@ -102,8 +106,8 @@ contract CoinsenceKit is KitBase {
     function initializeCSApps(
         Space space,
         Coin coin,
-        string name, 
-        bytes32 descHash, 
+        string name,
+        bytes32 descHash,
         address[] members
     ) internal
     {

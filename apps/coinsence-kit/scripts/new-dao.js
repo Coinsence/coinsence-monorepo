@@ -15,7 +15,7 @@ module.exports = async function(callback) {
 
   let kitAddresseFile = path.join(addressesPath, 'CoinsenceKit.json');
   let kitAddresses = JSON.parse(fs.readFileSync(kitAddresseFile));
-  let coinsenceKitAddress = process.env.KREDITS_KIT || kitAddresses[networkId]
+  let coinsenceKitAddress = process.env.COINSENCE_KIT || kitAddresses[networkId]
   if (!coinsenceKitAddress) {
     callback(new Error("CoinsenceKit address not found in environment variable COINSENCE_KIT"))
   }
@@ -23,7 +23,7 @@ module.exports = async function(callback) {
 
   let coinsenceKit = CoinsenceKit.at(coinsenceKitAddress)
 
-  coinsenceKit.newInstance(argv.name, argv.ipfs, argv.members).then((ret) => {
+  coinsenceKit.newInstance(argv.name, argv.ipfs).then((ret) => {
     console.log(ret.logs);
     const installedEvents = ret.logs.filter(log => log.event === 'InstalledApp').map(log => log.args)
     const deployEvents = ret.logs.filter(log => log.event === 'DeployInstance').map(log => log.args)

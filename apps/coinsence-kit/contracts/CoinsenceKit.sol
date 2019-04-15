@@ -50,11 +50,11 @@ contract KitBase is APMNamehash {
 contract CoinsenceKit is KitBase {
 
     constructor(ENS _ens)
-    // solium-disable-next-line no-empty-blocks 
+    // solium-disable-next-line no-empty-blocks
     KitBase(_ens) public {
     }
 
-    function newInstance(string name, bytes32 descHash, address[] members) public {
+    function newInstance(string name, bytes32 descHash) public {
         Kernel dao = fac.newDAO(this);
         ACL acl = ACL(dao.acl());
 
@@ -62,14 +62,14 @@ contract CoinsenceKit is KitBase {
         acl.createPermission(this, dao, appManagerRole, this);
 
         address root = msg.sender;
-        createCSApps(root, dao, name, descHash, members);
+        createCSApps(root, dao, name, descHash);
 
         handleCleanupPermissions(dao, acl, root);
 
         emit DeployInstance(dao);
     }
 
-    function createCSApps (address root, Kernel dao, string name, bytes32 descHash, address[] members) internal {
+    function createCSApps (address root, Kernel dao, string name, bytes32 descHash) internal {
         Space space;
         Coin coin;
 
@@ -81,7 +81,9 @@ contract CoinsenceKit is KitBase {
         space = Space(
             dao.newAppInstance(
                 appIds[0],
-                latestVersionAppBase(appIds[0])
+                latestVersionAppBase(appIds[0]),
+                new bytes(0),
+                true
             )
         );
         emit InstalledApp(space, appIds[0]);
@@ -89,12 +91,14 @@ contract CoinsenceKit is KitBase {
         coin = Coin(
             dao.newAppInstance(
                 appIds[1],
-                latestVersionAppBase(appIds[1])
+                latestVersionAppBase(appIds[1]),
+                new bytes(0),
+                true
             )
         );
         emit InstalledApp(coin, appIds[1]);
 
-        initializeCSApps(space, coin, name, descHash, members);
+        initializeCSApps(space, coin, name, descHash);
 
         handleCSPermissions(dao, space, coin);
     }
@@ -102,12 +106,11 @@ contract CoinsenceKit is KitBase {
     function initializeCSApps(
         Space space,
         Coin coin,
-        string name, 
-        bytes32 descHash, 
-        address[] members
+        string name,
+        bytes32 descHash
     ) internal
     {
-        space.initialize(name, descHash, members);
+        space.initialize(name, descHash);
         coin.initialize();
     }
 

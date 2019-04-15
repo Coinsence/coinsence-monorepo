@@ -2,8 +2,10 @@
   "name": "coinsence-monorepo",
   "private": true,
   "devDependencies": {
+    "@aragon/cli": "^5.4.0",
+    "coveralls": "^3.0.3",
     "lerna": "^3.13.1",
-    "coveralls": "^3.0.3"
+    "promptly": "^3.0.3"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --nohoist=@aragon/os",
@@ -13,6 +15,8 @@
     "publish:apps": "lerna run publish",
     "publish:http": "lerna run publish:http",
     "deploy:apps": "./scripts/deploy-apps.sh",
+    "deploy:kit": "cd apps/coinsence-kit && npm run compile-contracts && aragon contracts exec scripts/deploy-kit.js",
+    "deploy:dao": "cd apps/coinsence-kit && aragon contracts exec scripts/new-dao.js",
     "restart": "RESTART_KIT=true apps/shared/test-helpers/ganache-cli.sh",
     "start": "START_KIT=true apps/shared/test-helpers/ganache-cli.sh",
     "start:kit": "lerna run --scope=@coinsence/coinsence-kit --stream start",
@@ -31,9 +35,15 @@
     "lint:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream lint",
     "lint:coin": "lerna run --scope=@coinsence/apps-coin --concurrency=1 --stream lint",
     "lint:kit": "lerna run --scope=@coinsence/coinsence-kit --stream lint",
-    "lint:member": "lerna run --scope=@coinsence/apps-member --concurrency=1 --stream lint"
+    "lint:member": "lerna run --scope=@coinsence/apps-member --concurrency=1 --stream lint",
+    "build-json": "node ./scripts/build-json.js",
+    "repl": "truffle exec scripts/repl.js",
+    "seeds": "truffle exec scripts/seeds.js"
   },
   "dependencies": {
-    "@aragon/cli": "^5.4.0"
+    "eth-provider": "^0.2.2",
+    "ethers": "^4.0.27",
+    "ipfs-http-client": "^30.1.1",
+    "rsvp": "^4.8.2"
   }
 }

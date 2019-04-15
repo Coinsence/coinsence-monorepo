@@ -30,20 +30,12 @@ contract Space is AragonApp {
      * @notice init space
      * @dev maybe using another function to set space parameters so we don't need to pass them later to the DAO
      * @param _name space name
-     * @param _members space members (can be empty)
      */
-    function initialize(string _name, bytes32 _descHash, address[] _members) public onlyInit {
-        //check if all members addresses are valid
-        require(verifyMembers(members), "invalid member address");
-
+    function initialize(string _name, bytes32 _descHash) public onlyInit {
         //set space parameters
         name = _name;
         owner = msg.sender;
         descHash = _descHash;
-        members = _members;
-
-        //set list of addresses as members
-        setAsMembers(members);
 
         //set space owner as member 
         members.push(msg.sender);

@@ -59,7 +59,7 @@ contract('Member app', (accounts) => {
             assert.equal((await memberApp.membersIds(member1)).toNumber(), membersCountAfter.toNumber());
             assert.equal(await memberApp.exists(membersCountAfter), true);
             assert.equal(await memberApp.addressExists(member1), true);
-            assert.equal((await memberApp.getContributorIdByAddress(member1)).toNumber(), membersCountAfter.toNumber());
+            assert.equal((await memberApp.getMemberIdByAddress(member1)).toNumber(), membersCountAfter.toNumber());
         });
 
         it("should revert to add an existant member", async() => {
@@ -93,7 +93,7 @@ contract('Member app', (accounts) => {
 
         it("update account", async() => {
             await memberApp.updateMemberAccount(1, member1, accounts[2], { from: member1 });
-            let memberAddress = await memberApp.getContributorAddressById(1);
+            let memberAddress = await memberApp.getMemberAddressById(1);
             assert.equal(memberAddress, accounts[2]);
         });
     });

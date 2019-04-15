@@ -44,7 +44,7 @@ contract('Space app', (accounts) => {
       )
   
       //init space (app)
-      await space.initialize("coinsence", '0x0', []);
+      await space.initialize("coinsence", '0x0');
 
       //increment space members number
       countMembers++;

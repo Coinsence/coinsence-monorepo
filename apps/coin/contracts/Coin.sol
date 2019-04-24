@@ -82,7 +82,7 @@ contract Coin is StandardCoin, AragonApp {
         require(recipient != address(0), "invalid recipient address");
         require(amount > 0, "amount equal to zero");
 
-        _mint(msg.sender, amount);
+        _mint(recipient, amount);
     }
 
 }

@@ -54,14 +54,13 @@ contract CoinsenceKit is KitBase {
     KitBase(_ens) public {
     }
 
-    function newInstance(string name, bytes32 descHash) public {
+    function newInstance(string name, bytes32 descHash, address root) public {
         Kernel dao = fac.newDAO(this);
         ACL acl = ACL(dao.acl());
 
         bytes32 appManagerRole = dao.APP_MANAGER_ROLE();
         acl.createPermission(this, dao, appManagerRole, this);
 
-        address root = msg.sender;
         createCSApps(root, dao, name, descHash);
 
         handleCleanupPermissions(dao, acl, root);
@@ -100,7 +99,7 @@ contract CoinsenceKit is KitBase {
 
         initializeCSApps(space, coin, name, descHash);
 
-        handleCSPermissions(dao, space, coin);
+        handleCSPermissions(dao, space, coin, root);
     }
 
     function initializeCSApps(
@@ -117,11 +116,10 @@ contract CoinsenceKit is KitBase {
     function handleCSPermissions(
         Kernel dao,
         Space space,
-        Coin coin
+        Coin coin,
+        address root
     ) internal
     {
-        address root = msg.sender;
-
         ACL acl = ACL(dao.acl());
 
         //Space roles

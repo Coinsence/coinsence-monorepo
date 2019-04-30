@@ -11,9 +11,6 @@ contract Space is AragonApp {
 
     bytes32 public constant SPACE_MANAGER_ROLE = keccak256("SPACE_MANAGER_ROLE");
 
-    ///@notice space name 
-    string public name;
-
     ///@notice space description
     bytes32 public descHash;
 
@@ -25,21 +22,17 @@ contract Space is AragonApp {
 
     ///@notice mapping to verifiy if address is a member in the space
     mapping(address => bool) public isMember;
- 
+
     /**
      * @notice init space
      * @dev maybe using another function to set space parameters so we don't need to pass them later to the DAO
-     * @param _name space name
      */
-    function initialize(string _name, bytes32 _descHash) public onlyInit {
-        //set space parameters
-        name = _name;
-        owner = msg.sender;
-        descHash = _descHash;
+    function initialize(address _owner) public onlyInit {
+        owner = _owner;
 
-        //set space owner as member 
-        members.push(msg.sender);
-        isMember[msg.sender] = true;
+        //set space owner as member
+        members.push(_owner);
+        isMember[_owner] = true;
 
         initialized();
     }
@@ -110,7 +103,7 @@ contract Space is AragonApp {
             isMember[_members[i]] = true;
         }
     }
-    
+
     /**
      * @notice Get member address position from members array
      * @param _address member address
@@ -118,11 +111,11 @@ contract Space is AragonApp {
      */
     function getMemberAddressPosition(address _address) internal view isInitialized returns (uint256) {
         require(isMember[_address], "member not found");
-        
+
         for (uint256 i = 0; i < members.length; i++) {
             if (members[i] == _address) {
                 return i;
             }
-        }    
+        }
     }
 }

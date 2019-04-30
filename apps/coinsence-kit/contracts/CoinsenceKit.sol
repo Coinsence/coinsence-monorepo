@@ -54,21 +54,21 @@ contract CoinsenceKit is KitBase {
     KitBase(_ens) public {
     }
 
-    function newInstance(string name, bytes32 descHash, address root) public {
+    function newInstance(address root) public {
         Kernel dao = fac.newDAO(this);
         ACL acl = ACL(dao.acl());
 
         bytes32 appManagerRole = dao.APP_MANAGER_ROLE();
         acl.createPermission(this, dao, appManagerRole, this);
 
-        createCSApps(root, dao, name, descHash);
+        createCSApps(root, dao);
 
         handleCleanupPermissions(dao, acl, root);
 
         emit DeployInstance(dao);
     }
 
-    function createCSApps (address root, Kernel dao, string name, bytes32 descHash) internal {
+    function createCSApps (address root, Kernel dao) internal {
         Space space;
         Coin coin;
 
@@ -97,7 +97,7 @@ contract CoinsenceKit is KitBase {
         );
         emit InstalledApp(coin, appIds[1]);
 
-        initializeCSApps(space, coin, name, descHash);
+        initializeCSApps(space, coin, root);
 
         handleCSPermissions(dao, space, coin, root);
     }
@@ -105,11 +105,10 @@ contract CoinsenceKit is KitBase {
     function initializeCSApps(
         Space space,
         Coin coin,
-        string name,
-        bytes32 descHash
+        address root
     ) internal
     {
-        space.initialize(name, descHash);
+        space.initialize(root);
         coin.initialize();
     }
 

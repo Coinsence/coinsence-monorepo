@@ -3,6 +3,17 @@
 
 ## 2019-04-30
 
+### v3.0.0
+from account: 0x4D99d767477Fbb2B47EFeb17E2a78970AD22CCc1
+```
+ ✔ Successfully published coinsence-kit.open.aragonpm.eth v3.0.0: 
+ ℹ Contract address: 0x6353c1A3053bB911Fe49ff12AA8400D53651b4B0
+ ℹ Content (ipfs): QmYC79rbfEkxUZigmt821cXSvugEPen8xdGXe981XJj1AD
+ ℹ Transaction hash: 0xa3c707a1f48d3894a43615c22533985b0c6b28325270f24b42adfef623b900b6
+```
+
+## 2019-04-30
+
 ### v2.0.0
 from account: 0x4D99d767477Fbb2B47EFeb17E2a78970AD22CCc1
 ```

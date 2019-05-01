@@ -24,7 +24,7 @@ module.exports = async function(callback) {
   let coinsenceKit = CoinsenceKit.at(coinsenceKitAddress)
 
   coinsenceKit.newInstance(argv.name, argv.ipfs, argv.root).then((ret) => {
-    console.log(ret.logs);
+
     const installedEvents = ret.logs.filter(log => log.event === 'InstalledApp').map(log => log.args)
     const deployEvents = ret.logs.filter(log => log.event === 'DeployInstance').map(log => log.args)
 

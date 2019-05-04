@@ -11,7 +11,7 @@ import "@coinsence/apps-coin/contracts/Coin.sol";
 import "@aragon/os/contracts/apm/APMNamehash.sol";
 
 
-contract KitBase is APMNamehash {
+contract KitBase is APMNamehashOpen {
     ENS public ens;
     DAOFactory public fac;
 
@@ -74,8 +74,8 @@ contract CoinsenceKit is KitBase {
         Coin coin;
 
         bytes32[2] memory appIds = [
-            apmNamehash("coinsence-space"),     // 0
-            apmNamehash("coinsence-coin")       // 1
+            apmNamehashOpen("coinsence-space"),     // 0
+            apmNamehashOpen("coinsence-coin")       // 1
         ];
 
         space = Space(

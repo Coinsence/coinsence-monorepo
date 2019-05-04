@@ -8,9 +8,10 @@ import "@aragon/os/contracts/lib/ens/PublicResolver.sol";
 import "./misc/APMNamehashOpen.sol";
 import "@coinsence/apps-space/contracts/Space.sol";
 import "@coinsence/apps-coin/contracts/Coin.sol";
+import "@aragon/os/contracts/apm/APMNamehash.sol";
 
 
-contract KitBase is APMNamehashOpen {
+contract KitBase is APMNamehash {
     ENS public ens;
     DAOFactory public fac;
 
@@ -73,8 +74,8 @@ contract CoinsenceKit is KitBase {
         Coin coin;
 
         bytes32[2] memory appIds = [
-            apmNamehashOpen("coinsence-space"),     // 0
-            apmNamehashOpen("coinsence-coin")       // 1
+            apmNamehash("coinsence-space"),     // 0
+            apmNamehash("coinsence-coin")       // 1
         ];
 
         space = Space(

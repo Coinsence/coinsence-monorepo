@@ -9,6 +9,15 @@ const HDWalletProviderPrivkey = require('truffle-hdwallet-provider-privkey')
 
 const DEFAULT_MNEMONIC = 'explain tackle mirror kit van hammer degree position ginger unfair soup bonus'
 
+const mochaGasSettings = {
+  reporter: 'eth-gas-reporter',
+  reporterOptions: {
+    currency: 'EUR',
+    showTimeSpent: true
+  }
+}
+const mocha = process.env.GAS_REPORTER ? mochaGasSettings : {}
+
 const defaultRPC = (network) =>
   `https://${network}.infura.io`
 
@@ -67,6 +76,8 @@ module.exports = {
       gasPrice: 0x01
     }
   },
+
+  mocha,
   
   compilers: {
     solc: {

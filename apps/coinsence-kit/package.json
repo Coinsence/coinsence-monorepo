@@ -9,13 +9,14 @@
     "@coinsence/apps-space": "^1.0.0"
   },
   "devDependencies": {
-    "@aragon/cli": "^5.4.0",
+    "@aragon/cli": "^5.7.0",
     "@aragon/test-helpers": "^1.0.0",
     "@coinsence/test-helpers": "0.0.1",
-    "parcel-bundler": "^1.11.0",
     "chai": "^4.2.0",
-    "solidity-coverage": "0.5.11",
-    "eth-ens-namehash": "^2.0.8"
+    "eth-ens-namehash": "^2.0.8",
+    "eth-gas-reporter": "^0.1.12",
+    "parcel-bundler": "^1.11.0",
+    "solidity-coverage": "0.5.11"
   },
   "scripts": {
     "compile": "aragon contracts compile",
@@ -24,6 +25,7 @@
     "start": "aragon run --kit CoinsenceKit --kit-init @ARAGON_ENS",
     "lint": "solium --dir ./contracts",
     "test": "aragon contracts test --environment default",
+    "test:gas": "GAS_REPORTER=true aragon contracts test",
     "coverage": "SOLIDITY_COVERAGE=true npm run ganache-cli:test",
     "ganache-cli:test": "../shared/test-helpers/ganache-cli.sh",
     "versions": "aragon apm versions"

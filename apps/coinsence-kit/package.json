@@ -9,7 +9,7 @@
     "@coinsence/apps-space": "^1.0.0"
   },
   "devDependencies": {
-    "@aragon/cli": "^5.7.0",
+    "@aragon/cli": "^5.4.0",
     "@aragon/test-helpers": "^1.0.0",
     "@coinsence/test-helpers": "0.0.1",
     "chai": "^4.2.0",

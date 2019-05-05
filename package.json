@@ -5,8 +5,7 @@
     "@aragon/cli": "^5.4.0",
     "coveralls": "^3.0.3",
     "lerna": "^3.13.1",
-    "promptly": "^3.0.3",
-    "eth-gas-reporter": "^0.1.12"
+    "promptly": "^3.0.3"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --nohoist=@aragon/os",
@@ -22,9 +21,11 @@
     "start": "START_KIT=true apps/shared/test-helpers/ganache-cli.sh",
     "start:kit": "lerna run --scope=@coinsence/coinsence-kit --stream start",
     "test": "lerna run --scope=@coinsence/apps-* --concurrency=1 --stream test",
+    "test:gas": "lerna run --scope=@coinsence/apps-* --concurrency=1 --stream test:gas",
     "test:space": "lerna run --scope=@coinsence/apps-space --stream test",
     "test:coin": "lerna run --scope=@coinsence/apps-coin --stream test",
     "test:kit": "lerna run --scope=@coinsence/coinsence-kit --stream test",
+    "test:gas:kit": "lerna run --scope=@coinsence/coinsence-kit --stream test:gas",
     "coverage": "npm run coverage:all",
     "coverage:all": "lerna run --scope=@coinsence/apps-* --concurrency=1 --stream coverage",
     "coverage:space": "lerna run --scope=@coinsence/apps-space --concurrency=1 --stream coverage",
@@ -46,6 +47,7 @@
     "ethers": "^4.0.27",
     "ipfs-http-client": "^30.1.1",
     "morgan": "^1.9.1",
-    "rsvp": "^4.8.2"
+    "rsvp": "^4.8.2",
+    "truffle": "^5.0.15"
   }
 }

@@ -13,17 +13,19 @@ notifications:
 node_js:
   - '11.0.0'
 env:
+  - TASK=lint
   - TASK=test:space
   - TASK=test:coin
   - TASK=test:member
-  - TASK=devchain
-  - TASK=test:kit
-script:
-  - travis_wait 60 npm run $TASK
-#after_success:
-#  - ./node_modules/.bin/lcov-result-merger 'apps/*/coverage/lcov.info' | ./node_modules/.bin/coveralls
+#  - TASK=test:kit
+  - TASK=coverage:space
+  - TASK=coverage:coin
+  - TASK=coverage:member
+#  - TASK=coverage:kit
 before_script:
   - testrpc > /dev/null &
   - sleep 5
-after_script:
-  - npm run coverage && cat coverage/lcov.info | coveralls
+script:
+  - travis_wait 60 npm run $TASK
+after_success:
+  - ./node_modules/.bin/lcov-result-merger 'apps/*/coverage/lcov.info' | ./node_modules/.bin/coveralls

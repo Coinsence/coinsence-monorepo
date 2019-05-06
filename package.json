@@ -24,6 +24,7 @@
     "test:gas": "lerna run --scope=@coinsence/apps-* --concurrency=1 --stream test:gas",
     "test:space": "lerna run --scope=@coinsence/apps-space --stream test",
     "test:coin": "lerna run --scope=@coinsence/apps-coin --stream test",
+    "test:member": "lerna run --scope=@coinsence/apps-member --stream test",
     "test:kit": "lerna run --scope=@coinsence/coinsence-kit --stream test",
     "test:gas:kit": "lerna run --scope=@coinsence/coinsence-kit --stream test:gas",
     "coverage": "npm run coverage:all",

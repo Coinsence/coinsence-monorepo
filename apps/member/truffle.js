@@ -67,6 +67,14 @@ module.exports = {
       gasPrice: 0x01
     }
   },
+
+  mocha: {
+    reporter: 'eth-gas-reporter',
+    reporterOptions: {
+      currency: 'EUR',
+      showTimeSpent: true
+    }
+  },
   
   compilers: {
     solc: {

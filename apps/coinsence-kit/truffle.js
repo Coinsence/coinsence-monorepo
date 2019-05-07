@@ -68,6 +68,14 @@ module.exports = {
     }
   },
 
+  mocha: {
+    reporter: 'eth-gas-reporter',
+    reporterOptions: {
+      currency: 'EUR',
+      showTimeSpent: true
+    }
+  },
+  
   compilers: {
     solc: {
       version: "0.4.24"

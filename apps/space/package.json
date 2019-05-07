@@ -30,7 +30,6 @@
     "lint": "solium --dir ./contracts",
     "fix": "solium --dir ./contracts --fix",
     "test": "TRUFFLE_TEST=true npm run ganache-cli:test",
-    "test:gas": "GAS_REPORTER=true aragon contracts test",
     "coverage": "SOLIDITY_COVERAGE=true npm run ganache-cli:test"
   },
   "keywords": []

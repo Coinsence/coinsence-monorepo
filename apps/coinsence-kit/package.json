@@ -25,7 +25,6 @@
     "start": "aragon run --kit CoinsenceKit --kit-init @ARAGON_ENS",
     "lint": "solium --dir ./contracts",
     "test": "aragon contracts test --environment default",
-    "test:gas": "GAS_REPORTER=true aragon contracts test",
     "coverage": "SOLIDITY_COVERAGE=true npm run ganache-cli:test",
     "ganache-cli:test": "../shared/test-helpers/ganache-cli.sh",
     "versions": "aragon apm versions"

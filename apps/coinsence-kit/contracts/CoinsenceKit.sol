@@ -8,7 +8,6 @@ import "@aragon/os/contracts/lib/ens/PublicResolver.sol";
 import "./misc/APMNamehashOpen.sol";
 import "@coinsence/apps-space/contracts/Space.sol";
 import "@coinsence/apps-coin/contracts/Coin.sol";
-import "@aragon/os/contracts/apm/APMNamehash.sol";
 
 
 contract KitBase is APMNamehashOpen {

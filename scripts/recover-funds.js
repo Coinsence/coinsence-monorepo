@@ -3,7 +3,7 @@ const ethers = require('ethers');
 const path = require('path');
 const loadWallet = require('../lib/http/utils/load-wallet.js');
 
-const keysDirectory = process.env.COINSENCE_WALLETS_DIR || path.join(__dirname, '../../../', 'keys');
+const keysDirectory = process.env.COINSENCE_WALLETS_DIR || path.join(__dirname, '../', 'keys');
 const coinsenceWallet = process.env.COINSENCE_WALLET_ADDRESS;
 const password = process.env.PASSWORD || "coinsence";
 

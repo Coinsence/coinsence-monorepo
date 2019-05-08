@@ -17,19 +17,26 @@ fs.readdir(keysDirectory, function (err, accounts) {
     accounts.forEach(function (account) {
       let accountId = path.basename(account, '.json');
       
-      if(accountId != ".gitkeep") {
-        loadWallet(accountId, password).then(async(wallet) => {
-          let walletBalance = await ethProvider.getBalance(wallet.address);
-          let tx = {
-            to: coinsenceWallet,
-            value: walletBalance
-          };
-          let estimatedGasPrice = await ethProvider.estimateGas(tx);
-          tx.value = walletBalance - estimatedGasPrice;
+      loadWallet(accountId, password).then(async(wallet) => {
+        let signer = wallet.connect(ethProvider);
 
-          wallet.sendTransaction(tx);
+        let walletBalance = await ethProvider.getBalance(wallet.address);
+        let tx = {
+          to: coinsenceWallet,
+          value: walletBalance
+        };
+        let estimatedGasPrice = await ethProvider.estimateGas(tx);
+        tx.value = walletBalance - estimatedGasPrice;
+
+        signer.sendTransaction(tx).then(transaction => {
+          transaction.wait().then(result => {
+            console.log(result.transactionHash);
+          });
         });
-      }
+      }).catch(e => {
+        console.log(e);
+        new Error("Can't access wallet file");
+      });
     });
   }
 });

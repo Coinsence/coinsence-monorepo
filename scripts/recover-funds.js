@@ -35,7 +35,7 @@ fs.readdir(keysDirectory, function (err, accounts) {
         });
       }).catch(e => {
         console.log(e);
-        new Error("Can't access wallet file");
+        new Error(`Can't access wallet file: ${accountId}`);
       });
     });
   }

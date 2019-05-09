@@ -1,6 +1,4 @@
-const ethers = require('ethers');
-
-module.exports = async function(provider, signer, newAddress) {
+module.exports = async function(signer, provider, newAddress) {
   // Get the current balance
   let balance = await signer.getBalance();
 

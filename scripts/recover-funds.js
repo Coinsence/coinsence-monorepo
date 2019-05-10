@@ -8,7 +8,12 @@ const keysDirectory = process.env.COINSENCE_WALLETS_DIR || path.join(__dirname, 
 const coinsenceWallet = process.env.COINSENCE_WALLET_ADDRESS;
 const password = process.env.PASSWORD || "coinsence";
 
-let ethProvider = new ethers.getDefaultProvider('rinkeby');
+let ethProvider;
+if (process.env.ETH_PROVIDER_URL) {
+  ethProvider = new ethers.providers.JsonRpcProvider(process.env.ETH_PROVIDER_URL);
+} else {
+  ethProvider = new ethers.getDefaultProvider('rinkeby');
+}
 
 // Make sure we are sweeping to an EOA, not a contract. The gas required
 // to send to a contract cannot be certain, so we may leave dust behind

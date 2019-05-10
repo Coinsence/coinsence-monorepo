@@ -12,12 +12,19 @@ module.exports = async function(signer, provider, newAddress) {
   // The balance less exactly the txfee in wei
   let value = balance.sub(gasPrice.mul(gasLimit))
 
-  let tx = await signer.sendTransaction({
+  try {
+    let tx = await signer.sendTransaction({
       gasLimit: gasLimit,
       gasPrice: gasPrice,
       to: newAddress,
       value: value
-  });
+    });
 
-  console.log('Sent in Transaction: ' + tx.hash);
+    console.log('From wallet: ' + signer.address);
+    console.log('Sent in Transaction: ' + tx.hash);
+  }
+  catch(err) {
+    console.log(err);
+    new Error(`Can't send transaction from: ${signer.address}`);
+  }
 }

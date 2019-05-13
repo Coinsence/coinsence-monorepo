@@ -27,9 +27,9 @@ ethProvider.getCode(coinsenceWallet).then((code) => {
       return console.log('Error fetching wallets: ' + err);
     }
     else {
-      accounts.forEach(function (account) {
+      accounts.forEach(async (account) => {
         let accountId = path.basename(account, '.json');
-        transferFund(accountId, password, ethProvider, coinsenceWallet);
+        await transferFund(accountId, password, ethProvider, coinsenceWallet);
       });
     }
   });
@@ -37,8 +37,13 @@ ethProvider.getCode(coinsenceWallet).then((code) => {
 });    
 
 async function transferFund(accountId, password, provider, newAddress) {
-  let wallet = await loadWallet(accountId, password);
-  let signer = wallet.connect(provider);
-
-  await sweep(signer, ethProvider, newAddress);
+  try {
+    let wallet = await loadWallet(accountId, password);
+    let signer = wallet.connect(provider);
+    await sweep(signer, ethProvider, newAddress);
+  }
+  catch(err) {
+    console.log(err);
+    new Error(`Can't load wallet for the accountId: ${accountId}`);
+  }
 }

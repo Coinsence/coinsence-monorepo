@@ -7,11 +7,16 @@ const ZERO_ADDR = '0x0000000000000000000000000000000000000000';
 
 contract('Coin app', (accounts) => {
     let kernelBase, aclBase, daoFactory, dao, acl, coin;
+    let coinName, coinSymbol, coinDecimals;
   
     const root = accounts[0];
     const member1 = accounts[1];
   
     before(async() => {
+      coinName = "Coinsence Coin";
+      coinSymbol = "CC";
+      coinDecimals = 18;
+
       kernelBase = await getContract('Kernel').new(true) // petrify immediately
       aclBase = await getContract('ACL').new()
       daoFactory = await getContract('DAOFactory').new(kernelBase.address, aclBase.address, ZERO_ADDR);
@@ -41,7 +46,7 @@ contract('Coin app', (accounts) => {
       )
   
       //init coin (app)
-      await coin.initialize();
+      await coin.initialize(coinName, coinSymbol, coinDecimals);
   
       //create coin issuer permission for coin owner
       await acl.createPermission(
@@ -71,29 +76,10 @@ contract('Coin app', (accounts) => {
     });
 
     describe("Coin issuing", async () => {
-      let name = "coinsence";
-      let symbol = "cc";
-      let decimals = 18;
-
-      it("should revert when issuing a coin from an address that does not have issuing permission", async() => {
-        return assertRevert(async () => {
-          await coin.issueCoin(name, symbol, decimals, { from: member1 })
-          'address does not have permission to issue token'
-        })
-      });
-
-      it("issue token", async() => {
-        await coin.issueCoin(name, symbol, decimals, { from: root });
-        assert.equal(await coin.name(), name);
-        assert.equal(await coin.symbol(), symbol);
-        assert.equal(await coin.decimal(), decimals);
-      });
-
-      it("should revert when issuing an already issued coin", async() => {
-        return assertRevert(async () => {
-          await coin.issueCoin(name, symbol, decimals, { from: root })
-          'address does not have permission to issue token'
-        })
+      it("Check coin parameters", async() => {
+        assert.equal(await coin.name(), coinName);
+        assert.equal(await coin.symbol(), coinSymbol);
+        assert.equal(await coin.decimal(), coinDecimals);
       });
     });
 

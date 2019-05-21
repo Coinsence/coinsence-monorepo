@@ -54,21 +54,30 @@ contract CoinsenceKit is KitBase {
     KitBase(_ens) public {
     }
 
-    function newInstance(string name, bytes32 descHash, address root) public {
+    function newInstance(string spaceName, bytes32 descHash, string coinName, string coinSymbol, uint8 coinDecimals, address root) public {
         Kernel dao = fac.newDAO(this);
         ACL acl = ACL(dao.acl());
 
         bytes32 appManagerRole = dao.APP_MANAGER_ROLE();
         acl.createPermission(this, dao, appManagerRole, this);
 
-        createCSApps(root, dao, name, descHash);
+        createCSApps(root, dao, spaceName, descHash, coinName, coinSymbol, coinDecimals);
 
         handleCleanupPermissions(dao, acl, root);
 
         emit DeployInstance(dao);
     }
 
-    function createCSApps (address root, Kernel dao, string name, bytes32 descHash) internal {
+    function createCSApps (
+        address root,
+        Kernel dao,
+        string spaceName,
+        bytes32 descHash,
+        string coinName,
+        string coinSymbol,
+        uint8 coinDecimals
+    ) internal
+    {
         Space space;
         Coin coin;
 
@@ -97,7 +106,7 @@ contract CoinsenceKit is KitBase {
         );
         emit InstalledApp(coin, appIds[1]);
 
-        initializeCSApps(space, coin, name, descHash);
+        initializeCSApps(space, coin, spaceName, descHash, coinName, coinSymbol, coinDecimals);
 
         handleCSPermissions(dao, space, coin, root);
     }
@@ -105,12 +114,15 @@ contract CoinsenceKit is KitBase {
     function initializeCSApps(
         Space space,
         Coin coin,
-        string name,
-        bytes32 descHash
+        string spaceName,
+        bytes32 descHash,
+        string coinName,
+        string coinSymbol,
+        uint8 coinDecimals
     ) internal
     {
-        space.initialize(name, descHash);
-        coin.initialize();
+        space.initialize(spaceName, descHash);
+        coin.initialize(coinName, coinSymbol, coinDecimals);
     }
 
     function handleCSPermissions(

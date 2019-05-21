@@ -23,14 +23,14 @@ contract Coin is StandardCoin, AragonApp {
     string private _symbol;
     ///@notice coin decimals
     uint8 private _decimals;
-    ///@notice coin state (false=not yet issued)
-    bool internal _isIssued;
 
     /**
      * @notice init coin
      */
-    function initialize() public onlyInit {
-        _isIssued = false;
+    function initialize(string memory name, string memory symbol, uint8 decimals) public onlyInit {
+        _name = name;
+        _symbol = symbol;
+        _decimals = decimals;
 
         initialized();
     }
@@ -57,21 +57,6 @@ contract Coin is StandardCoin, AragonApp {
      */
     function decimal() public view isInitialized returns(uint8) {
         return _decimals;
-    }
-
-    /**
-     * @notice issue coin
-     * @param name coin name
-     * @param symbol coin symbol
-     * @param decimals coin decimal
-     */
-    function issueCoin(string memory name, string memory symbol, uint8 decimals) public isInitialized auth(ISSUE_ROLE) {
-        require(!_isIssued, "Coin already issued");
-        _name = name;
-        _symbol = symbol;
-        _decimals = decimals;
-
-        _isIssued = true;
     }
 
     /**

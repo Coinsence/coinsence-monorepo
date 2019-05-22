@@ -1,0 +1,6 @@
+{
+  "name": "Coinsence API",
+  "version": "1.0.0",
+  "description": "REST API to communicate with Coinsence Smart Contracts",
+  "title": "Coinsence API"
+}

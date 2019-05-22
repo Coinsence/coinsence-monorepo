@@ -4,9 +4,11 @@
   "devDependencies": {
     "@aragon/cli": "^5.4.0",
     "coveralls": "^3.0.3",
+    "gulp": "^4.0.2",
+    "gulp-apidoc": "^0.2.8",
+    "lcov-result-merger": "^3.1.0",
     "lerna": "^3.13.1",
-    "promptly": "^3.0.3",
-    "lcov-result-merger": "^3.1.0"
+    "promptly": "^3.0.3"
   },
   "scripts": {
     "bootstrap": "lerna bootstrap --nohoist=@aragon/os",
@@ -40,7 +42,8 @@
     "lint:member": "lerna run --scope=@coinsence/apps-member --concurrency=1 --stream lint",
     "build-json": "node ./scripts/build-json.js",
     "repl": "truffle exec scripts/repl.js",
-    "seeds": "truffle exec scripts/seeds.js"
+    "seeds": "truffle exec scripts/seeds.js",
+    "generate:doc-api": "./node_modules/.bin/gulp apidoc"
   },
   "dependencies": {
     "eth-provider": "^0.2.2",

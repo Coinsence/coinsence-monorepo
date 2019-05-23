@@ -486,8 +486,8 @@
             "group": "201",
             "type": "String[]",
             "optional": false,
-            "field": "Addresses.",
-            "description": ""
+            "field": "Addresses",
+            "description": "<p>ACL and Coin app addresses.</p>"
           }
         ]
       }

@@ -1,6 +1,17 @@
 # CoinsenceKit deployments
 `aragon apm publish major --environment staging --init @ARAGON_ENS`
 
+## 2019-05-23
+
+### v6.0.0
+from account: 0x4D99d767477Fbb2B47EFeb17E2a78970AD22CCc1
+```
+ ✔ Successfully published coinsence-kit.open.aragonpm.eth v6.0.0: 
+ ℹ Contract address: 0x682F254498c096C7dBfca6E250409269D83772B0
+ ℹ Content (ipfs): QmTvuKLUPPTPMxK3SeTiiLavsdwVs9ZYHzvQU6Xfrnqc9m
+ ℹ Transaction hash: 0x4c3bd3df00fcdfd15e1ff1b50a7950716e65b0f177a3a5c9bea558428c7f1509
+```
+
 ## 2019-05-01
 
 ### v5.0.0

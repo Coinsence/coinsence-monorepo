@@ -1,6 +1,17 @@
 # Coin deployments
 `aragon apm publish major --environment staging`
 
+## 2019-05-23
+
+### v2.0.0
+from account: 0x4D99d767477Fbb2B47EFeb17E2a78970AD22CCc1
+```
+ ✔ Successfully published coinsence-coin.open.aragonpm.eth v2.0.0: 
+ ℹ Contract address: 0x8aAF5E82d96dDb517B39f46e2B587CE2B47970ba
+ ℹ Content (ipfs): QmfFBBVBdxk9RYzWnTJJhE4U7rYLWyhEucNWxptyiCc7XP
+ ℹ Transaction hash: 0x2dbf922564134a2ea9be0d5e819167ae0710731ebfa0cf2f3e7ad7daa0f0ba14
+```
+
 ## 2019-04-29
 
 ### v1.0.0

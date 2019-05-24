@@ -52,7 +52,7 @@ $ npm run test:space
 # Run coverage
 $ npm run coverage
 
-# current app name aliases: {space, coin}
+# current app name aliases: {space, coin, member}
 ```
 
 ## Contracts architecture
@@ -89,7 +89,7 @@ Prints all known DAO addresses and the DAO address for the current network
 
 Deploys a new CoinsenceKit that allows to create a new DAO
 
-    $ cd apps/coinsence-kit && truffle exec script/deploy-kit.js
+    $ cd apps/coinsence-kit && truffle exec scripts/deploy-kit.js
     or
     $ npm run deploy:kit
 
@@ -99,15 +99,14 @@ Deploys a new CoinsenceKit that allows to create a new DAO
 
 Creates and configures a new DAO instance.
 
-    $ cd apps/coinsence-kit && aragon contracts exec script/new-dao.js 
+    $ cd apps/coinsence-kit && aragon contracts exec scripts/new-dao.js 
       Arguments:
-        --name space name
-        --ipfs ipfs hash 
-        --members array of members addresses
-        
-    example:
-    $aragon contracts exec script/new-dao.js --name "coinsence" --ipfs "0x0" --members --
-
+        --spaceName     Space name
+        --ipfs          IPFS hash for space description
+        --coinName      Coin name
+        --coinSymbol    Coin symbol         
+        --coinDecimals  Coin decimals
+        --root          Owner address
     or
     $ npm run deploy:dao
 
@@ -122,6 +121,26 @@ Runs `npm install` for each app and publishes a new version.
     or
     $ npm run deploy:apps
 
+## Deployment
+
+### Apps deployment
+
+To deploy a new app version run:
+
+    $ aragon apm publish major --environment=ENVIRONMENT_TO_DEPLOY
+
+### CoinsenceKit
+
+deploy the CoinsenceKit as Kit to create new DAOs
+
+    $ aragon contracts exec apps/coinsence-kit/scripts/deploy-kit.js                                     --environment=ENVIRONMENT_TO_DEPLOY
+
+### Creating a new DAO
+
+make sure all apps and the CoinsenceKit are deployed, then create a new DAO:
+
+    $ aragon contracts exec apps/coinsence-kit/scripts/new-dao.js --environment=ENVIRONMENT_TO_DEPLOY    --spaceName=SPACE_NAME --ipfs=IPFS_HASH --coinName=COIN_NAME --coinSymbol=COIN_SYMBOL              --coinDecimals=COIN_DECIMALS --root=OWNER_ADDRESS  
+
 ## ACL / Permissions
 
 ## Upgradeable contracts
@@ -134,7 +153,7 @@ for more details.
 
 1. Setup (see ###Development Setup)
     1. Deploy each contract/apps (see `/apps/*`)
-    2. Create a new DAO (see scripts/deploy-kit.js)
+    2. Create a new DAO (see /apps/coinsence-kit/scripts/deploy-kit.js)
 2. Update
     1. Deploy a new Version of the contract/app (see `/apps/*`)
     2. Use the `aragon dao upgrade` command to "install" the new version for the DAO

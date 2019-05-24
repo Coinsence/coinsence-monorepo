@@ -55,15 +55,15 @@ $ npm run coverage
 # current app name aliases: {space, coin}
 ```
 
-## Contract architecture
+## Contracts architecture
 
 Contracts are organized in independent apps (see `/apps`) and are developed 
 and deployed independently. Each app has a version and can be "installed" 
 on the Coinsence DAO independently.
 
-![](docs/coinsence-diagram.png)
+![](docs/architecture/draw-io-dao-architecture-2.png)
 
-A DAO can be deployed using the `scripts/deploy-kit.js` script or with the 
+A DAO can be deployed using the `apps/coinsence-kit/scripts/deploy-kit.js` script or with the 
 `npm run deploy:dao` command. This deploys a new Kredits DAO, installs
 the latest app versions and sets the required permissions.
 

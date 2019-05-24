@@ -140,7 +140,7 @@ deploy the CoinsenceKit as Kit to create new DAOs
 make sure all apps and the CoinsenceKit are deployed, then create a new DAO:
 
     $ aragon contracts exec apps/coinsence-kit/scripts/new-dao.js --environment=ENVIRONMENT_TO_DEPLOY
-    --spaceName=SPACE_NAME --ipfs=IPFS_HASH --coinName=COIN_NAME --coinSymbol=COIN_SYMBOL --coinDecimals=COIN_DECIMALS --root=OWNER_ADDRESS  
+    --spaceName=SPACE_NAME --ipfs=IPFS_HASH --coinName=COIN_NAME --coinSymbol=COIN_SYMBOL --coinDecimals=COIN_DECIMALS --root=OWNER_ADDRESS
 
 ## ACL / Permissions
 

@@ -82,8 +82,8 @@ contract CoinsenceKit is KitBase {
         Coin coin;
 
         bytes32[2] memory appIds = [
-            apmNamehash("coinsence-space"),     // 0
-            apmNamehash("coinsence-coin")       // 1
+            apmNamehashOpen("coinsence-space"),     // 0
+            apmNamehashOpen("coinsence-coin")       // 1
         ];
 
         space = Space(

@@ -471,6 +471,73 @@ define({ "api": [
     }
   },
   {
+    "type": "post",
+    "url": "/migrate/space",
+    "title": "",
+    "name": "PostMigrateSpace",
+    "group": "Migrate",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Object[]",
+            "optional": false,
+            "field": "accounts",
+            "description": "<p>List of accounts objects</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "accountId",
+            "description": "<p>Accounts unique ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "dao",
+            "description": "<p>Dao address</p>"
+          }
+        ]
+      }
+    },
+    "filename": "lib/http/apps/migrate.js",
+    "groupTitle": "Migrate",
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingAccountId",
+            "description": "<p>User account ID is missing.</p>"
+          },
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingDaoError",
+            "description": "<p>dao address is missing.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Bad Request response:",
+          "content": "HTTP 400 Bad Request\n{\n  \"error\": \"accountId is missing\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Bad Request response:",
+          "content": "HTTP 400 Bad Request\n{\n  \"error\": \"dao is missing\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
     "url": "/space/",
     "title": "",
@@ -990,9 +1057,9 @@ define({ "api": [
         "Parameter": [
           {
             "group": "Parameter",
-            "type": "Number",
+            "type": "String[]",
             "optional": false,
-            "field": "accountId",
+            "field": "accountsIds",
             "description": "<p>Accounts unique ID.</p>"
           }
         ]
@@ -1026,36 +1093,15 @@ define({ "api": [
           {
             "group": "400",
             "optional": false,
-            "field": "MissingAccountId",
-            "description": "<p>User account ID is missing.</p>"
-          }
-        ],
-        "409": [
-          {
-            "group": "409",
-            "optional": false,
-            "field": "ExistantWallet",
-            "description": "<p>User account already have a wallet.</p>"
-          }
-        ],
-        "500": [
-          {
-            "group": "500",
-            "optional": false,
-            "field": "InternalServer",
-            "description": "<p>The server encountered an unexpected condition that prevented it from fulfilling the request.</p>"
+            "field": "MissingAccountsIds",
+            "description": "<p>Users accounts IDs is missing.</p>"
           }
         ]
       },
       "examples": [
         {
           "title": "Bad Request response:",
-          "content": "HTTP 400 Bad Request\n{\n  \"error\": \"accountId is missing\"\n}",
-          "type": "json"
-        },
-        {
-          "title": "Conflict response:",
-          "content": "HTTP 409 Conflict\n{\n  \"error\": \"account already has a wallet\"\n}",
+          "content": "HTTP 400 Bad Request\n{\n  \"error\": \"accountsIds is missing\"\n}",
           "type": "json"
         }
       ]

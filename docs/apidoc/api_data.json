@@ -485,7 +485,35 @@
             "type": "Object[]",
             "optional": false,
             "field": "accounts",
-            "description": "<p>List of accounts objects</p>"
+            "description": "<p>List of account</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "accounts.address",
+            "description": "<p>account address</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "accounts.accountId",
+            "description": "<p>account unique id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "accounts.balance",
+            "description": "<p>account balance</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Boolean",
+            "optional": false,
+            "field": "accounts.isMember",
+            "description": "<p>account status(member/space account)</p>"
           },
           {
             "group": "Parameter",

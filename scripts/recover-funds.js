@@ -27,14 +27,19 @@ ethProvider.getCode(coinsenceWallet).then((code) => {
       return console.log('Error fetching wallets: ' + err);
     }
     else {
+<<<<<<< HEAD
       for(let i=0; i<accounts.length; i++) {
         let accountId = path.basename(accounts[i], '.json');
+=======
+      accounts.forEach(async (account) => {
+        let accountId = path.basename(account, '.key');
+>>>>>>> Remove wallet key encryption
         await transferFund(accountId, password, ethProvider, coinsenceWallet);
       }
     }
   });
-  
-});    
+
+});
 
 async function transferFund(accountId, password, provider, newAddress) {
   try {

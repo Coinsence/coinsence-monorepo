@@ -11,6 +11,7 @@ contract('Coin app', (accounts) => {
   
     const root = accounts[0];
     const member1 = accounts[1];
+    const member2 = accounts[2];
   
     before(async() => {
       coinName = "Coinsence Coin";
@@ -134,6 +135,34 @@ contract('Coin app', (accounts) => {
         assert.equal(member1Balance.toNumber(), tokenToTransfer);
         assert.equal(ownerBalanceAfterTransfer.toNumber(), ownerBalanceBeforeTransfer.toNumber()-tokenToTransfer)
       });
+
+    });
+
+    describe("Approve coin", async() => {
+
+      it('can correctly approve', async () => {
+        const approvedAmount = 50
+
+        // Create approval
+        await coin.approve(member1, approvedAmount)
+        assert.equal((await coin.allowance(root, member1)).valueOf(), approvedAmount, 'Allowance of member1 should be correct')
+      })      
+    });
+
+    describe("Transfer from", async() => {
+
+      it('can correctly transferFrom', async () => {
+        const initialBalance = await coin.balanceOf(root).valueOf();
+        console.log(initialBalance);
+        // Create approval
+        const approvedAmount = 50
+        await coin.approve(member1, approvedAmount)
+
+        // Transfer to receiver through the mock
+        await coin.transferFrom(root, member2, approvedAmount, {from: member1})
+        assert.equal((await coin.balanceOf(root)).valueOf(), initialBalance - approvedAmount, 'Balance of root should be correct')
+        assert.equal((await coin.balanceOf(member2)).valueOf(), approvedAmount, 'Balance of member1 should be correct')
+      })
 
     });
 

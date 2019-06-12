@@ -137,4 +137,29 @@ contract('Coin app', (accounts) => {
 
     });
 
+    describe("Approve coin", async() => {
+
+      it('can correctly approve', async () => {
+        const approvedAmount = 50
+
+        // Create approval
+        await coin.approve(member1, approvedAmount)
+        assert.equal((await coin.allowance(root, member1)).valueOf(), approvedAmount, 'Allowance of receiver should be correct')
+      })
+      /*
+      it('detects failed approve', async () => {
+        const preApprovedAmount = 5000
+
+        // Create pre-exisiting approval
+        await safeERC20Mock.approve(tokenMock.address, receiver, preApprovedAmount)
+
+        // Attempt to create another approval without reseting it back to 0
+        const receipt = await safeERC20Mock.approve(tokenMock.address, receiver, preApprovedAmount - 500)
+
+        assertMockResult(receipt, false)
+        assert.equal((await tokenMock.allowance(safeERC20Mock.address, receiver)).valueOf(), preApprovedAmount, 'Allowance of receiver should be the pre-existing value')
+      })
+      */
+    });
+
 });  

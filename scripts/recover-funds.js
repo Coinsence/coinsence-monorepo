@@ -28,7 +28,7 @@ ethProvider.getCode(coinsenceWallet).then((code) => {
     }
     else {
       for(let i=0; i<accounts.length; i++) {
-        let accountId = path.basename(accounts[i], '.json');
+        let accountId = path.basename(accounts[i], '.key');
         await transferFund(accountId, password, ethProvider, coinsenceWallet);
       }
     }

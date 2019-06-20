@@ -472,6 +472,13 @@
             "group": "Parameter",
             "type": "String",
             "optional": false,
+            "field": "spaceId",
+            "description": "<p>space id</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
             "field": "spaceName",
             "description": "<p>Space name</p>"
           },

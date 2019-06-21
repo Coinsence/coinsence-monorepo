@@ -359,6 +359,106 @@ define({ "api": [
     }
   },
   {
+    "type": "get",
+    "url": "/dao/",
+    "title": "",
+    "name": "GetDao",
+    "group": "Dao",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "spaceId",
+            "description": "<p>Space unique ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "accountId",
+            "description": "<p>Accounts unique ID.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "lib/http/apps/dao.js",
+    "groupTitle": "Dao",
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
+            "field": "txHash",
+            "description": "<p>Transaction hash.</p>"
+          },
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
+            "field": "daoAddress",
+            "description": "<p>DAO address.</p>"
+          },
+          {
+            "group": "201",
+            "type": "String[]",
+            "optional": false,
+            "field": "Apps",
+            "description": "<p>instances.</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingAccountId",
+            "description": "<p>User account ID is missing.</p>"
+          },
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingSpaceId",
+            "description": "<p>Space account ID is missing.</p>"
+          }
+        ],
+        "404": [
+          {
+            "group": "404",
+            "optional": false,
+            "field": "NotFound",
+            "description": "<p>could not load dao.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Bad Request response:",
+          "content": "HTTP 400 Bad Request\n{\n  \"error\": \"accountId is missing\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Bad Request response:",
+          "content": "HTTP 400 Bad Request\n{\n  \"error\": \"spaceId is missing\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Not Found response:",
+          "content": "HTTP 404 Not Found\n{\n  \"error\": \"Could not load dao\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "post",
     "url": "/dao/",
     "title": "",
@@ -368,6 +468,13 @@ define({ "api": [
     "parameter": {
       "fields": {
         "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "spaceId",
+            "description": "<p>space id</p>"
+          },
           {
             "group": "Parameter",
             "type": "String",
@@ -420,24 +527,9 @@ define({ "api": [
         "201": [
           {
             "group": "201",
-            "type": "String",
             "optional": false,
-            "field": "txHash",
-            "description": "<p>Transaction hash.</p>"
-          },
-          {
-            "group": "201",
-            "type": "String",
-            "optional": false,
-            "field": "daoAddress",
-            "description": "<p>DAO address.</p>"
-          },
-          {
-            "group": "201",
-            "type": "String[]",
-            "optional": false,
-            "field": "Apps",
-            "description": "<p>instances.</p>"
+            "field": "Created",
+            "description": ""
           }
         ]
       }

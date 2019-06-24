@@ -46,6 +46,7 @@
     "generate:doc-api": "./node_modules/.bin/gulp apidoc"
   },
   "dependencies": {
+    "@sentry/node": "^5.4.3",
     "eth-provider": "^0.2.2",
     "ethers": "^4.0.27",
     "ipfs-http-client": "^30.1.1",

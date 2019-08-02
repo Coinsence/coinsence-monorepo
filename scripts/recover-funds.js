@@ -22,19 +22,19 @@ if (process.env.ETH_PROVIDER_URL) {
 ethProvider.getCode(coinsenceWallet).then((code) => {
   if (code !== '0x') { throw new Error('Cannot sweep to a contract'); }
 
-  fs.readdir(keysDirectory, function (err, accounts) {
+  fs.readdir(keysDirectory, async function (err, accounts) {
     if (err) {
       return console.log('Error fetching wallets: ' + err);
     }
     else {
-      accounts.forEach(async (account) => {
-        let accountId = path.basename(account, '.json');
+      for(let i=0; i<accounts.length; i++) {
+        let accountId = path.basename(accounts[i], '.key');
         await transferFund(accountId, password, ethProvider, coinsenceWallet);
-      });
+      }
     }
   });
-  
-});    
+
+});
 
 async function transferFund(accountId, password, provider, newAddress) {
   try {

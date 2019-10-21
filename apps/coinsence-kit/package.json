@@ -20,7 +20,7 @@
   },
   "scripts": {
     "compile": "aragon contracts compile",
-    "compile-contracts": "aragon contracts compile --all",
+    "compile-contracts": "aragon contracts compile",
     "deploy": "aragon deploy --init @ARAGON_ENS",
     "start": "aragon run --kit CoinsenceKit --kit-init @ARAGON_ENS",
     "lint": "solium --dir ./contracts",

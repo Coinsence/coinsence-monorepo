@@ -1185,6 +1185,13 @@ define({ "api": [
             "group": "201",
             "type": "String",
             "optional": false,
+            "field": "privateKey",
+            "description": "<p>Wallet private key.</p>"
+          },
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
             "field": "balanceWei",
             "description": "<p>Address balance in Wei unit.</p>"
           },

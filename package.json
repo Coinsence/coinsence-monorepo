@@ -43,6 +43,7 @@
     "build-json": "node ./scripts/build-json.js",
     "repl": "truffle exec scripts/repl.js",
     "seeds": "truffle exec scripts/seeds.js",
+    "run:api": "ETH_PROVIDER_URL=http://localhost:8545 SIGNER_INDEX=0 apmDomain=aragonpm.eth HUMHUB_WEBSERVICE=localhumhub node lib/http/index.js",
     "generate:doc-api": "./node_modules/.bin/gulp apidoc"
   },
   "dependencies": {

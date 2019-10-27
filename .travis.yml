@@ -23,6 +23,7 @@ env:
   - TASK=coverage:member
 #  - TASK=coverage:kit
 before_script:
+  - npm i
   - testrpc > /dev/null &
   - sleep 5
 script:

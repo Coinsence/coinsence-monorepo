@@ -8,10 +8,13 @@ import "@aragon/os/contracts/apps/AragonApp.sol";
 contract Space is AragonApp {
 
     event NewMember(address member);
+    event RemovedMember(address member);
 
     bytes32 public constant SPACE_MANAGER_ROLE = keccak256("SPACE_MANAGER_ROLE");
+    bytes32 public constant ADD_MEMBER_ROLE = keccak256("ADD_MEMBER_ROLE");
+    bytes32 public constant REMOVE_MEMBER_ROLE = keccak256("REMOVE_MEMBER_ROLE");
 
-    ///@notice space name 
+    ///@notice space name
     string public name;
 
     ///@notice space description
@@ -37,7 +40,7 @@ contract Space is AragonApp {
         owner = msg.sender;
         descHash = _descHash;
 
-        //set space owner as member 
+        //set space owner as member
         members.push(msg.sender);
         isMember[msg.sender] = true;
 
@@ -57,7 +60,7 @@ contract Space is AragonApp {
      * @dev use this function to add members even if one member only (less functions)
      * @param _members list of members addresses
      */
-    function addMembers(address[] _members) public isInitialized auth(SPACE_MANAGER_ROLE) {
+    function addMembers(address[] _members) public isInitialized auth(ADD_MEMBER_ROLE) {
         require(verifyMembers(_members), "invalid member address");
 
         for (uint i = 0; i < _members.length; i++) {
@@ -84,6 +87,27 @@ contract Space is AragonApp {
         delete members[memberPosition];
         //set as not member
         isMember[msg.sender] = false;
+
+        emit RemovedMember(msg.sender);
+    }
+
+    /**
+     * @notice remove user from space
+     * @dev function can only be called by address that have REMOVE_MEMBER_ROLE
+     * @param _member address of the member to remove
+     */
+    function removeMember(address _member) public isInitialized auth(REMOVE_MEMBER_ROLE) {
+        require((_member != msg.sender) && (_member != address(0)), "error");
+        require(isMember[_member], "Member does not exist");
+
+        //get address position in members array
+        uint256 memberPosition = getMemberAddressPosition(_member);
+        //delete address
+        delete members[memberPosition];
+        //set as not member
+        isMember[_member] = false;
+
+        emit RemovedMember(_member);
     }
 
     /**
@@ -123,6 +147,6 @@ contract Space is AragonApp {
             if (members[i] == _address) {
                 return i;
             }
-        }    
+        }
     }
 }

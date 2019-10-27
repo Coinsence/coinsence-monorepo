@@ -136,6 +136,9 @@ contract CoinsenceKit is KitBase {
 
         //Space roles
         acl.createPermission(root, space, space.SPACE_MANAGER_ROLE(), root);
+        acl.createPermission(root, space, space.ADD_MEMBER_ROLE(), root);
+        acl.createPermission(root, space, space.REMOVE_MEMBER_ROLE(), root);
+
         //Coin roles
         acl.createPermission(root, coin, coin.ISSUE_ROLE(), root);
         acl.createPermission(root, coin, coin.MINT_ROLE(), root);

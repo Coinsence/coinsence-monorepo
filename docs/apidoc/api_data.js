@@ -1150,6 +1150,87 @@ define({ "api": [
     }
   },
   {
+    "type": "post",
+    "url": "/space/removeMember",
+    "title": "",
+    "name": "PostSpaceRemoveMember",
+    "group": "Space",
+    "version": "1.0.0",
+    "filename": "lib/http/apps/space.js",
+    "groupTitle": "Space",
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "type": "String",
+            "optional": false,
+            "field": "txHash",
+            "description": "<p>Transaction hash.</p>"
+          }
+        ]
+      }
+    },
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "Number",
+            "optional": false,
+            "field": "accountId",
+            "description": "<p>Accounts unique ID.</p>"
+          },
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "dao",
+            "description": "<p>Dao address</p>"
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingAccountId",
+            "description": "<p>User account ID is missing.</p>"
+          },
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingDaoError",
+            "description": "<p>dao address is missing.</p>"
+          }
+        ],
+        "500": [
+          {
+            "group": "500",
+            "optional": false,
+            "field": "InternalServer",
+            "description": "<p>The server encountered an unexpected condition that prevented it from fulfilling the request.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Bad Request response:",
+          "content": "HTTP 400 Bad Request\n{\n  \"error\": \"accountId is missing\"\n}",
+          "type": "json"
+        },
+        {
+          "title": "Bad Request response:",
+          "content": "HTTP 400 Bad Request\n{\n  \"error\": \"dao is missing\"\n}",
+          "type": "json"
+        }
+      ]
+    }
+  },
+  {
     "type": "get",
     "url": "/wallet/",
     "title": "",

@@ -58,9 +58,12 @@ contract('DAO bare kit', (accounts) => {
             kernel = await getContract('Kernel').at(address);
             ;(await Promise.all([
                 kernel.hasPermission(accounts[0], space.address, await space.SPACE_MANAGER_ROLE(), '0x0'),
+                kernel.hasPermission(accounts[0], space.address, await space.ADD_MEMBER_ROLE(), '0x0'),
+                kernel.hasPermission(accounts[0], space.address, await space.REMOVE_MEMBER_ROLE(), '0x0'),
+
                 kernel.hasPermission(accounts[0], coin.address, await coin.ISSUE_ROLE(), '0x0'),
                 kernel.hasPermission(accounts[0], coin.address, await coin.MINT_ROLE(), '0x0'),
-            ])).should.deep.equal([true, true, true])
+            ])).should.deep.equal([true, true, true, true, true])
         });
 
     });

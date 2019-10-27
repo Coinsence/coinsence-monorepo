@@ -11,7 +11,7 @@
     "promptly": "^3.0.3"
   },
   "scripts": {
-    "bootstrap": "lerna bootstrap --hoist",
+    "bootstrap": "lerna bootstrap --nohoist=@aragon/os",
     "postinstall": "npm run bootstrap",
     "devchain": "aragon devchain",
     "devchain:reset": "aragon devchain --reset",

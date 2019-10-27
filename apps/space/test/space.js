@@ -56,7 +56,23 @@ contract('Space app', (accounts) => {
         await space.SPACE_MANAGER_ROLE(),
         root,
         { from: root }
-      )
+      );
+
+      await acl.createPermission(
+        root,
+        space.address,
+        await space.ADD_MEMBER_ROLE(),
+        root,
+        { from: root }
+      );
+
+      await acl.createPermission(
+        root,
+        space.address,
+        await space.REMOVE_MEMBER_ROLE(),
+        root,
+        { from: root }
+      );
     
     });
 
@@ -76,39 +92,82 @@ contract('Space app', (accounts) => {
         let spaceManagerPermission = await acl.hasPermission(root, space.address, await space.SPACE_MANAGER_ROLE());
         assert.equal(spaceManagerPermission, true);
       });  
+
+      it('check owner can add members', async() => {
+        let addMemberPermission = await acl.hasPermission(root, space.address, await space.ADD_MEMBER_ROLE());
+        assert.equal(addMemberPermission, true);
+      });
+
+      it('check owner can remove members', async() => {
+        let removeMemberPermission = await acl.hasPermission(root, space.address, await space.REMOVE_MEMBER_ROLE());
+        assert.equal(removeMemberPermission, true);
+      });
     });
 
     describe("Space management", async () => {
-      it("should revert when adding a member from an address that does not have manager permission", async() => {
-        return assertRevert(async () => {
-          await space.addMembers([accounts[2]], { from: member1 })
-          'address does not have permission to add member'
-        })
+
+      describe("Add members", async() => {
+        it("should revert when adding a member from an address that does not have manager permission", async() => {
+          return assertRevert(async () => {
+            await space.addMembers([member2], { from: member1 })
+            'address does not have permission to add member'
+          })
+        });
+    
+        it("should revert when adding a member address same as `msg.sender`", async() => {
+          return assertRevert(async () => {
+            await space.addMembers([root], { from: root })
+            'member address should be different from msg.sender'
+          })
+        });
+    
+        it("should revert when adding a member with address(0)", async() => {
+          return assertRevert(async () => {
+            await space.addMembers([ZERO_ADDR], { from: root })
+            'member address should be different from msg.sender'
+          })
+        });
+    
+        it("add new member", async() => {
+          await space.addMembers([member1, member2], { from: root });
+          assert.equal(await space.isMember(member1), true);
+          assert.equal(await space.isMember(member2), true);
+          //increment space members number by 2
+          countMembers = countMembers+2;
+          //let countMembers = await space.getMembersCount();
+          assert.equal((await space.getMembersCount()).toNumber(), countMembers);
+        });
       });
-  
-      it("should revert when adding a member address same as `msg.sender`", async() => {
-        return assertRevert(async () => {
-          await space.addMembers([root], { from: root })
-          'member address should be different from msg.sender'
-        })
+
+      describe("Remove members", async() => {
+        it("should revert when removing a member from an address that does not have manager permission", async() => {
+          return assertRevert(async () => {
+            await space.removeMember([member2], { from: member1 })
+            'address does not have permission to add member'
+          })
+        });
+    
+        it("should revert when removing a member address same as `msg.sender`", async() => {
+          return assertRevert(async () => {
+            await space.removeMember([root], { from: root })
+            'member address should be different from msg.sender'
+          })
+        });
+    
+        it("should revert when adding a member with address(0)", async() => {
+          return assertRevert(async () => {
+            await space.removeMember([ZERO_ADDR], { from: root })
+            'member address should be different from msg.sender'
+          })
+        });
+    
+        it("remove member", async() => {
+          assert.equal(await space.isMember(member1), true);
+          await space.removeMember(member1, { from: root });
+          assert.equal(await space.isMember(member1), false);
+        });
       });
-  
-      it("should revert when adding a member with address(0)", async() => {
-        return assertRevert(async () => {
-          await space.addMembers([ZERO_ADDR], { from: root })
-          'member address should be different from msg.sender'
-        })
-      });
-  
-      it("add new member", async() => {
-        await space.addMembers([member1, member2], { from: root });
-        assert.equal(await space.isMember(member1), true);
-        assert.equal(await space.isMember(member2), true);
-        //increment space members number by 2
-        countMembers = countMembers+2;
-        //let countMembers = await space.getMembersCount();
-        assert.equal((await space.getMembersCount()).toNumber(), countMembers);
-      });
+      
     });
 
     describe("Leave space", async () => {

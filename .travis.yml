@@ -1,13 +1,13 @@
 sudo: required
 language: node_js
-cache:
-  directories:
-    - node_modules
-    - apps/space/node_modules
-    - apps/coin/node_modules
-    - apps/member/node_modules
-    - apps/coinsence-kit/node_modules
-    - apps/shared/test-helpers/node_modules
+#cache:
+#  directories:
+#    - node_modules
+#    - apps/space/node_modules
+#    - apps/coin/node_modules
+#    - apps/member/node_modules
+#    - apps/coinsence-kit/node_modules
+#    - apps/shared/test-helpers/node_modules
 notifications:
   email: false
 node_js:

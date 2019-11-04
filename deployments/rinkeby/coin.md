@@ -1,6 +1,17 @@
 # Coin deployments
 `aragon apm publish major --environment staging`
 
+## 2019-11-04 Fix get decimals function
+
+### v3.0.0
+from account: 0x4D99d767477Fbb2B47EFeb17E2a78970AD22CCc1
+```
+ ✔ Successfully published coinsence-coin.open.aragonpm.eth v3.0.0: 
+ ℹ Contract address: 0x47378ccF881Af35cE7f7634c1a715A518ab48De1
+ ℹ Content (ipfs): QmQNxD1m9p5K9P6iLe2J2WM4SHSTvJPHbpEMyX6m2bnrgW
+ ℹ Transaction hash: 0x923e9a4409d42a7159a73fa4fd2d508e9bc9a1eff67ab61f6eaefbaee2b9f224
+```
+
 ## 2019-05-23
 
 ### v2.0.0

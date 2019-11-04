@@ -55,7 +55,7 @@ contract Coin is StandardCoin, AragonApp {
      * @notice get coin decimal
      * @return coin decimal
      */
-    function decimal() public view isInitialized returns(uint8) {
+    function decimals() public view isInitialized returns(uint8) {
         return _decimals;
     }
 

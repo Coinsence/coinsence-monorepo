@@ -1,4 +1,4 @@
-# coinsence-monorepo ![GitHub](https://img.shields.io/github/license/Coinsence/coinsence-monorepo.svg) [![Build Status](https://travis-ci.org/Coinsence/coinsence-monorepo.svg?branch=master)](https://travis-ci.org/Coinsence/coinsence-monorepo) [![Coverage Status](https://coveralls.io/repos/github/Coinsence/coinsence-monorepo/badge.svg?branch=master)](https://coveralls.io/github/Coinsence/coinsence-monorepo?branch=master)
+# coinsence-monorepo ![GitHub](https://img.shields.io/github/license/Coinsence/coinsence-monorepo.svg) [![CircleCI](https://circleci.com/gh/Coinsence/coinsence-monorepo/tree/master.svg?style=svg)](https://circleci.com/gh/Coinsence/coinsence-monorepo/tree/master) [![Build Status](https://travis-ci.org/Coinsence/coinsence-monorepo.svg?branch=master)](https://travis-ci.org/Coinsence/coinsence-monorepo) [![Coverage Status](https://coveralls.io/repos/github/Coinsence/coinsence-monorepo/badge.svg?branch=master)](https://coveralls.io/github/Coinsence/coinsence-monorepo?branch=master)
 Coinsence project monorepo - includes our smart contracts
 
 This repository contains the following apps:

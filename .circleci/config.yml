@@ -6,6 +6,10 @@ version: 2
 jobs:
   build:
     working_directory: ~/coinsence-monorepo
+    branches:
+      only:
+        - /.*/
+
     docker:
       # specify the version you desire here
       - image: circleci/node:10.16.3

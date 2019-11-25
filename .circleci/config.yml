@@ -1,0 +1,58 @@
+# Javascript Node CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-javascript/ for more details
+#
+version: 2
+jobs:
+  build:
+    working_directory: ~/coinsence-monorepo
+    docker:
+      # specify the version you desire here
+      - image: circleci/node:10.16.3
+      - image: trufflesuite/ganache-cli
+        # command: ganache-cli --deterministic -e 300 -p 8545 -m 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' --accounts 30
+
+    steps:
+      - checkout
+      # Download and cache dependencies
+      - restore_cache:
+          name: Restore NPM Package Cache
+          keys:
+            - v1-dependencies-{{ checksum "package.json" }}
+      - run: 
+          name: Install Dependencies
+          command: npm install
+      - save_cache:
+          name: Save NPM Package Cache
+          paths:
+            - node_modules
+          key: v1-dependencies-{{ checksum "package.json" }}
+      - run:
+          name: Lint
+          command: npm run lint
+      - run: 
+          name: Test Space app
+          command: npm run test:space
+      - run: 
+          name: Test Coin app
+          command: npm run test:coin
+      - run: 
+          name: Test Member app
+          command: npm run test:member
+      - run: 
+          name: Coverage Space app
+          command: npm run coverage:space
+      - run: 
+          name: Coverage Coin app
+          command: npm run coverage:coin
+      - run: 
+          name: Coverage Member app
+          command: npm run coverage:member
+      - store_artifacts:
+          path: test-results.xml
+          prefix: tests
+      - store_artifacts: 
+          path: coverage
+          prefix: coverage
+      - store_test_results:
+          path: test-results.xml

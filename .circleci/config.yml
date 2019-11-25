@@ -13,7 +13,7 @@ jobs:
     docker:
       # specify the version you desire here
       - image: circleci/node:10.16.3
-      - image: trufflesuite/ganache-cli
+      #- image: trufflesuite/ganache-cli
         # command: ganache-cli --deterministic -e 300 -p 8545 -m 'candy maple cake sugar pudding cream honey rich smooth crumble sweet treat' --accounts 30
 
     steps:

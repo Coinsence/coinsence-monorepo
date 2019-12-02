@@ -1394,5 +1394,59 @@
         }
       ]
     }
+  },
+  {
+    "type": "post",
+    "url": "/wallet/refund",
+    "title": "",
+    "name": "PostWalletRefund",
+    "group": "Wallet",
+    "version": "1.0.0",
+    "parameter": {
+      "fields": {
+        "Parameter": [
+          {
+            "group": "Parameter",
+            "type": "String",
+            "optional": false,
+            "field": "wallet",
+            "description": "<p>address.</p>"
+          }
+        ]
+      }
+    },
+    "filename": "lib/http/apps/wallet.js",
+    "groupTitle": "Wallet",
+    "success": {
+      "fields": {
+        "201": [
+          {
+            "group": "201",
+            "optional": false,
+            "field": "Created",
+            "description": ""
+          }
+        ]
+      }
+    },
+    "error": {
+      "fields": {
+        "400": [
+          {
+            "group": "400",
+            "optional": false,
+            "field": "MissingWalletAddress",
+            "description": "<p>Wallet address is missing.</p>"
+          }
+        ]
+      },
+      "examples": [
+        {
+          "title": "Bad Request response:",
+          "content": "HTTP 400 Bad Request\n{\n  \"error\": \"wallet address is missing\"\n}",
+          "type": "json"
+        }
+      ]
+    }
   }
 ]

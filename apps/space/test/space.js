@@ -154,7 +154,7 @@ contract('Space app', (accounts) => {
           })
         });
     
-        it("should revert when adding a member with address(0)", async() => {
+        it("should revert when removing a member with address(0)", async() => {
           return assertRevert(async () => {
             await space.removeMember([ZERO_ADDR], { from: root })
             'member address should be different from msg.sender'
@@ -179,6 +179,7 @@ contract('Space app', (accounts) => {
       });
 
       it("leave space", async() => {
+        await space.addMembers([member1], { from: root });
         assert.equal(await space.isMember(member1), true);
         await space.leaveSpace({ from: member1 });
         assert.equal(await space.isMember(member1), false);

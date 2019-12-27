@@ -33,25 +33,25 @@ jobs:
           key: v1-dependencies-{{ checksum "package.json" }}
       - run:
           name: Lint
-          command: npm run lint:fix
+          command: npm run lint
       - run: 
           name: Test Space app
-          command: cd ./apps/space && npm run test
+          command: npm run test:space
       - run: 
           name: Test Coin app
-          command: cd ./apps/coin && npm run test
+          command: npm run test:coin
       - run: 
           name: Test Member app
-          command: cd ./apps/member && npm run test
+          command: npm run test:member
       - run: 
           name: Coverage Space app
-          command: cd ./apps/space && npm run coverage
+          command: npm run coverage:space
       - run: 
           name: Coverage Coin app
-          command: cd ./apps/coin && npm run coverage
+          command: npm run coverage:coin
       - run: 
           name: Coverage Member app
-          command: cd ./apps/member && npm run coverage
+          command: npm run coverage:member
       - store_artifacts:
           path: test-results.xml
           prefix: tests

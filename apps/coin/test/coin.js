@@ -80,7 +80,7 @@ contract('Coin app', (accounts) => {
       it("Check coin parameters", async() => {
         assert.equal(await coin.name(), coinName);
         assert.equal(await coin.symbol(), coinSymbol);
-        assert.equal(await coin.decimal(), coinDecimals);
+        assert.equal(await coin.decimals(), coinDecimals);
       });
     });
 

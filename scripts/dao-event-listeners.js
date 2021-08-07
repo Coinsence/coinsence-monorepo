@@ -50,7 +50,7 @@ function setTransferEventListener(coinAddress, provider) {
         fromAddress: from,
         toAddress: to, 
         coinAddress: contract.address, 
-        amount: value.toNumber(), 
+        amount: value.toString(), 
         txHash: event.transactionHash
       });
       
